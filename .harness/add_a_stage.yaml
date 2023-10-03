@@ -1,0 +1,37 @@
+pipeline:
+  name: add_a_stage
+  identifier: add_a_stage
+  projectIdentifier: test
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: account.Github
+        repoName: Minion
+        build: <+input>
+  stages:
+    - stage:
+        name: Build My Stuff
+        identifier: Build_My_Stuff
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: Echo
+                  identifier: Echo
+                  spec:
+                    connectorRef: account.harnessImage
+                    image: ubuntu:2004
+                    shell: Sh
+                    command: echo "Do this stuff!!!"
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Docker
+            spec: {}
