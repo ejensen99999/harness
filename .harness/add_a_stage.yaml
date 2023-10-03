@@ -26,7 +26,7 @@ pipeline:
                   identifier: Echo
                   spec:
                     connectorRef: account.harnessImage
-                    image: ubuntu:2004
+                    image: ubuntu:20.04
                     shell: Sh
                     command: echo "Do this stuff!!!"
           platform:
