@@ -68,3 +68,8 @@ pipeline:
                       secretManagerRef: harnessSecretManager
                   timeout: 10m
         tags: {}
+        failureStrategies:
+          - onFailure:
+              errors: []
+              action:
+                type: MarkAsFailure
