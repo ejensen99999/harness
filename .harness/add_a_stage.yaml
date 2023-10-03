@@ -27,7 +27,7 @@ pipeline:
                   spec:
                     connectorRef: account.harnessImage
                     image: ubuntu:20.04
-                    shell: <+input>
+                    shell: Sh
                     command: <+input>
           platform:
             os: Linux
