@@ -53,7 +53,7 @@ pipeline:
                   name: TerraformPlan_1
                   identifier: TerraformPlan_1
                   spec:
-                    provisionerIdentifier: rsfoioin4
+                    provisionerIdentifier: output
                     configuration:
                       command: Apply
                       configFiles:
@@ -66,6 +66,7 @@ pipeline:
                             folderPath: test
                           type: Github
                       secretManagerRef: harnessSecretManager
+                      skipRefreshCommand: false
                   timeout: 10m
         tags: {}
         failureStrategies:
