@@ -1,0 +1,15 @@
+inputSet:
+  name: my_import_set
+  identifier: my_import_set
+  orgIdentifier: default
+  projectIdentifier: test
+  pipeline:
+    identifier: add_a_stage
+    properties:
+      ci:
+        codebase:
+          build:
+            type: branch
+            spec:
+              branch: main
+  object Object: pipeline.properties.ci.codebase
