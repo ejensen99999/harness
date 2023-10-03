@@ -27,8 +27,8 @@ pipeline:
                   spec:
                     connectorRef: account.harnessImage
                     image: ubuntu:20.04
-                    shell: Sh
-                    command: echo "Do this stuff!!!"
+                    shell: <+input>
+                    command: <+input>
           platform:
             os: Linux
             arch: Amd64
