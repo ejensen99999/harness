@@ -40,3 +40,31 @@ pipeline:
             type: String
             description: ""
             value: "90"
+    - stage:
+        name: Custom Stage
+        identifier: Custom_Stage
+        description: ""
+        type: Custom
+        spec:
+          execution:
+            steps:
+              - step:
+                  type: TerraformPlan
+                  name: TerraformPlan_1
+                  identifier: TerraformPlan_1
+                  spec:
+                    provisionerIdentifier: rsfoioin4
+                    configuration:
+                      command: Apply
+                      configFiles:
+                        store:
+                          spec:
+                            connectorRef: account.Github
+                            repoName: minion
+                            gitFetchType: Branch
+                            branch: main
+                            folderPath: test
+                          type: Github
+                      secretManagerRef: harnessSecretManager
+                  timeout: 10m
+        tags: {}
