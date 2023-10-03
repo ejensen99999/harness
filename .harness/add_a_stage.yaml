@@ -35,3 +35,8 @@ pipeline:
           runtime:
             type: Docker
             spec: {}
+        variables:
+          - name: SOME_VALUE
+            type: String
+            description: ""
+            value: "90"
