@@ -34,9 +34,9 @@ RUN mkdir -m 777 -p client-tools/kubectl/v1.24.3 \
   && chgrp -R 0 /opt/harness-delegate  \
   && chown -R 1001 /opt/harness-delegate
 
-# RUN pip3 install azure-cli==2.52.0 \
-#   && microdnf clean all \
-#   && rm -rf /var/cache/yum
+RUN pip3 install azure-cli==2.52.0 \
+  && microdnf clean all \
+  && rm -rf /var/cache/yum
 
 ENV PATH=/opt/harness-delegate/client-tools/kubectl/v1.24.3/:$PATH
 ENV PATH=/opt/harness-delegate/client-tools/go-template/v0.4.2/:$PATH
