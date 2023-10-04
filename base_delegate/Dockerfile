@@ -4,7 +4,8 @@ USER 0
 
 ENV TARGETARCH=amd64
 RUN microdnf install --nodocs git \
-  && microdnf install python3 python3-pip \
+  && microdnf install python3 \
+  && microdnf install python3-pip \
   && python3 --version
 
 RUN mkdir -m 777 -p client-tools/kubectl/v1.24.3 \
@@ -33,7 +34,7 @@ RUN mkdir -m 777 -p client-tools/kubectl/v1.24.3 \
   && chgrp -R 0 /opt/harness-delegate  \
   && chown -R 1001 /opt/harness-delegate
 
-RUN python3 pip install azure-cli
+RUN pip install azure-cli
 
 RUN microdnf clean all \
   && rm -rf /var/cache/yum
