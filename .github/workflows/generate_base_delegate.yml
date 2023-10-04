@@ -11,7 +11,7 @@ env:
   WORKING_REPO_DIR: target
   TEMP_REGISTRY: ghcr.io
   TAG: "base-delegate:full"
-  TEMP_REPO: "${{env.TEMP_REGISTRY}}/${{env.TAG}}"
+  TEMP_REPO: "ghcr.io/ejensen99999/base-delegate:full"
 
 jobs:
   docker_build:
