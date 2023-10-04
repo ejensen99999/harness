@@ -26,7 +26,7 @@ jobs:
       # Runs a single command using the runners shell
       - name: Compile Delegate Container
         run: |
-          docker build -t ${{env.IMAGE_NAME}}:${{env.TAG}} --rm ./base_delegate
+          docker build -t ${{secrets.DOCKERHUB_USER}}/${{env.IMAGE_NAME}}:${{env.TAG}} --rm ./base_delegate
 
           docker image ls
 
@@ -34,4 +34,4 @@ jobs:
       - name: Push to Github Packages
         run: |
           echo "${{ secrets.DOCKERHUB_PAT }}" | docker login -u ${{secrets.DOCKERHUB_USER}} --password-stdin
-          docker push ${{env.IMAGE_NAME}}:${{env.TAG}}
+          docker push ${{secrets.DOCKERHUB_USER}}/${{env.IMAGE_NAME}}:${{env.TAG}}
