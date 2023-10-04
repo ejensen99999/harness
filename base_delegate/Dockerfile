@@ -4,7 +4,7 @@ USER 0
 
 ENV TARGETARCH=amd64
 RUN microdnf install --nodocs git \
-  && microdnf install python3 \
+  && microdnf install python3 python3-pip \
   && python3 --version
 
 RUN mkdir -m 777 -p client-tools/kubectl/v1.24.3 \
