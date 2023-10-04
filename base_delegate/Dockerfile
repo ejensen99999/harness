@@ -33,8 +33,8 @@ RUN mkdir -m 777 -p client-tools/kubectl/v1.24.3 \
   && chgrp -R 0 /opt/harness-delegate  \
   && chown -R 1001 /opt/harness-delegate
 
-RUN apt update \
-  && apt install -y python3-pip \
+RUN apt-get update \
+  && apt-get install -y python3-pip \
   && pip3 --version \
   && pip3 install azure-cli
 
