@@ -9,9 +9,10 @@ permissions:
 
 env:
   WORKING_REPO_DIR: target
-  TEMP_REGISTRY: ghcr.io
-  TAG: "base-delegate:full"
-  TEMP_REPO: "ghcr.io/ejensen99999/base-delegate:full"
+  DOCKER_REPO: "ejensen99999"
+  IMAGE_NAME: "base-delegate"
+  TAG: "full"
+  
 
 jobs:
   docker_build:
@@ -25,12 +26,12 @@ jobs:
       # Runs a single command using the runners shell
       - name: Compile Delegate Container
         run: |
-          docker build -t ${{env.TEMP_REPO}} --rm ./base_delegate
+          docker build -t ${{env.IMAGE_NAME}}:${{env.TAG}} --rm ./base_delegate
 
           docker image ls
 
       # Runs a set of commands using the runners shell
       - name: Push to Github Packages
         run: |
-          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ${{ env.TEMP_REGISTRY }} -u $ --password-stdin
-          docker push ${{env.TEMP_REPO}}
+          echo "${{ secrets.DOCKERHUB_PAT }}" | docker login -u ${{secrets.DOCKERHUB_USER}} --password-stdin
+          docker push ${{env.ejensen99999}}/${{env.IMAGE_NAME}}:${{env.TAG}}
