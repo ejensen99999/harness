@@ -33,9 +33,7 @@ RUN mkdir -m 777 -p client-tools/kubectl/v1.24.3 \
   && chgrp -R 0 /opt/harness-delegate  \
   && chown -R 1001 /opt/harness-delegate
 
-RUN rpm --import https://packages.microsoft.com/keys/microsoft.asc \
-  && yum install -y https://packages.microsoft.com/config/rhel/8/packages-microsoft-prod.rpm \
-  && yum install azure-cli 
+RUN curl -L https://aka.ms/InstallAzureCli | bash
 
 ENV PATH=/opt/harness-delegate/client-tools/kubectl/v1.24.3/:$PATH
 ENV PATH=/opt/harness-delegate/client-tools/go-template/v0.4.2/:$PATH
