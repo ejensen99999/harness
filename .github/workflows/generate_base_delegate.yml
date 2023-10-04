@@ -15,9 +15,9 @@ jobs:
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: |
-          ls -al ./base_delgate
+          ls -al ./base_delegate
           
-          docker build ./base_delgate
+          docker build ./base_delegate
 
           docker ps
 
