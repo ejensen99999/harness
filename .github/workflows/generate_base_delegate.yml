@@ -15,7 +15,7 @@ jobs:
       # Runs a single command using the runners shell
       - name: Compile Delegate Container
         run: |
-          docker build --label "base-delegate" --rm ./base_delegate
+          docker build -t "base-delegate:full" --label "base-delegate" --rm ./base_delegate
 
           docker image ls
 
