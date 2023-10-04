@@ -6,8 +6,9 @@ ENV TARGETARCH=amd64
 RUN microdnf install --nodocs git \
   && microdnf install python38 \
   && microdnf install python38-pip \
-  && python3 --version \
-  && mkdir -m 777 -p client-tools/kubectl/v1.24.3 \
+  && python3 --version
+
+RUN mkdir -m 777 -p client-tools/kubectl/v1.24.3 \
   && curl -s -L -o client-tools/kubectl/v1.24.3/kubectl https://app.harness.io/public/shared/tools/kubectl/release/v1.24.3/bin/linux/$TARGETARCH/kubectl \
   && mkdir -m 777 -p client-tools/helm/v2.13.1 \
   && curl -s -L -o client-tools/helm/v2.13.1/helm https://app.harness.io/public/shared/tools/helm/release/v2.13.1/bin/linux/$TARGETARCH/helm \
@@ -29,14 +30,13 @@ RUN microdnf install --nodocs git \
   && curl -s -L -o client-tools/kustomize/v4.5.4/kustomize https://app.harness.io/public/shared/tools/kustomize/release/v4.5.4/bin/linux/$TARGETARCH/kustomize \
   && mkdir -m 777 -p client-tools/scm/f1024c6b \
   && curl -s -L -o client-tools/scm/f1024c6b/scm https://app.harness.io/public/shared/tools/scm/release/f1024c6b/bin/linux/$TARGETARCH/scm \
-  && pip3 install azure-cli==2.52.0 \
-  && microdnf clean all \
-  && rm -rf /var/cache/yum \
   && chmod -R 775 /opt/harness-delegate \
   && chgrp -R 0 /opt/harness-delegate  \
   && chown -R 1001 /opt/harness-delegate
 
-  
+RUN pip3 install azure-cli==2.52.0 \
+  && microdnf clean all \
+  && rm -rf /var/cache/yum
 
 ENV PATH=/opt/harness-delegate/client-tools/kubectl/v1.24.3/:$PATH
 ENV PATH=/opt/harness-delegate/client-tools/go-template/v0.4.2/:$PATH
