@@ -33,10 +33,9 @@ RUN mkdir -m 777 -p client-tools/kubectl/v1.24.3 \
   && chgrp -R 0 /opt/harness-delegate  \
   && chown -R 1001 /opt/harness-delegate
 
-RUN apt-get update \
-  && apt-get install -y python3-pip \
-  && pip3 --version \
-  && pip3 install azure-cli
+RUN rpm --import https://packages.microsoft.com/keys/microsoft.asc \
+  && dnf install -y https://packages.microsoft.com/config/rhel/8/packages-microsoft-prod.rpm \
+  && dnf install azure-cli 
 
 ENV PATH=/opt/harness-delegate/client-tools/kubectl/v1.24.3/:$PATH
 ENV PATH=/opt/harness-delegate/client-tools/go-template/v0.4.2/:$PATH
