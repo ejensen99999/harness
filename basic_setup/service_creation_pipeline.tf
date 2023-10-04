@@ -11,7 +11,7 @@ resource "harness_platform_pipeline" "example" {
   project_id = local.project_id
   name       = local.name
   git_details {
-    branch_name    = "branchName"
+    branch_name    = "main"
     commit_message = "commitMessage"
     file_path      = "filePath"
     connector_ref  = "connectorRef"
