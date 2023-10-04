@@ -35,7 +35,6 @@ RUN mkdir -m 777 -p client-tools/kubectl/v1.24.3 \
   && chown -R 1001 /opt/harness-delegate
 
 RUN pip3 install azure-cli==2.52.0
-#RUN ls -al /usr/bin/p*
 
 RUN microdnf clean all \
   && rm -rf /var/cache/yum
