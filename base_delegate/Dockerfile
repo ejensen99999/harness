@@ -4,8 +4,8 @@ USER 0
 
 ENV TARGETARCH=amd64
 RUN microdnf install --nodocs git \
-  && microdnf clean all \
-  && rm -rf /var/cache/yum
+  && microdnf install python3 \
+  && python3 --version
 
 RUN mkdir -m 777 -p client-tools/kubectl/v1.24.3 \
   && curl -s -L -o client-tools/kubectl/v1.24.3/kubectl https://app.harness.io/public/shared/tools/kubectl/release/v1.24.3/bin/linux/$TARGETARCH/kubectl \
@@ -33,9 +33,10 @@ RUN mkdir -m 777 -p client-tools/kubectl/v1.24.3 \
   && chgrp -R 0 /opt/harness-delegate  \
   && chown -R 1001 /opt/harness-delegate
 
-RUN ls -al /usr/bin/p*
+RUN curl -L https://aka.ms/InstallAzureCli | bash
 
-#RUN curl -L https://aka.ms/InstallAzureCli | bash
+RUN microdnf clean all \
+  && rm -rf /var/cache/yum
 
 ENV PATH=/opt/harness-delegate/client-tools/kubectl/v1.24.3/:$PATH
 ENV PATH=/opt/harness-delegate/client-tools/go-template/v0.4.2/:$PATH
