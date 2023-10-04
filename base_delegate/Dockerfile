@@ -33,7 +33,7 @@ RUN mkdir -m 777 -p client-tools/kubectl/v1.24.3 \
   && chgrp -R 0 /opt/harness-delegate  \
   && chown -R 1001 /opt/harness-delegate
 
-RUN curl -L https://aka.ms/InstallAzureCli | bash
+RUN pip install azure-cli
 
 RUN microdnf clean all \
   && rm -rf /var/cache/yum
