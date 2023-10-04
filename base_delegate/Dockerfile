@@ -29,13 +29,14 @@ RUN mkdir -m 777 -p client-tools/kubectl/v1.24.3 \
   && curl -s -L -o client-tools/kustomize/v4.5.4/kustomize https://app.harness.io/public/shared/tools/kustomize/release/v4.5.4/bin/linux/$TARGETARCH/kustomize \
   && mkdir -m 777 -p client-tools/scm/f1024c6b \
   && curl -s -L -o client-tools/scm/f1024c6b/scm https://app.harness.io/public/shared/tools/scm/release/f1024c6b/bin/linux/$TARGETARCH/scm \
-  && apt update \
-  && apt -y install python3-pip \
-  && pip3 --version \
-  && pip3 install azure-cli \
   && chmod -R 775 /opt/harness-delegate \
   && chgrp -R 0 /opt/harness-delegate  \
   && chown -R 1001 /opt/harness-delegate
+
+RUN apt update \
+  && apt install -y python3-pip \
+  && pip3 --version \
+  && pip3 install azure-cli
 
 ENV PATH=/opt/harness-delegate/client-tools/kubectl/v1.24.3/:$PATH
 ENV PATH=/opt/harness-delegate/client-tools/go-template/v0.4.2/:$PATH
