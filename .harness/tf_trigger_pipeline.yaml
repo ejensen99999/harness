@@ -95,7 +95,8 @@ pipeline:
                       description: ""
                       required: true
                   strategy:
-                    matrix: {}
+                    matrix:
+                      folders: <+execution.steps.ShellScript_1.output.outputVariables.folders>
         tags: {}
         failureStrategies:
           - onFailure:
