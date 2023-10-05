@@ -1,0 +1,14 @@
+inputSet:
+  name: trigger_input_set
+  identifier: trigger_input_set
+  orgIdentifier: default
+  projectIdentifier: test
+  pipeline:
+    identifier: tf_trigger_pipeline
+    properties:
+      ci:
+        codebase:
+          build:
+            type: branch
+            spec:
+              branch: <+trigger.branch>
