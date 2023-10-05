@@ -81,7 +81,7 @@ pipeline:
         repoName: harness
         build: <+input>
   variables:
-    - name: CHANGED_FILES
+    - name: PAYLOAD
       type: String
       description: ""
       required: false
