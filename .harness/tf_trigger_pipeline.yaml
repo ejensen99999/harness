@@ -23,9 +23,37 @@ pipeline:
                     source:
                       type: Inline
                       spec:
-                        script: echo "here we go!"
-                    environmentVariables: []
-                    outputVariables: []
+                        script: |-
+                          #!/usr/bin/env bash 
+
+                          json=$payload
+
+                          readarray -t changes < <(echo $json | jq -c '.commits[] | [.added[], .removed[], .modified[]]' | jq -c '.[]')
+
+                          declare -A folders
+
+                          for i in "${changes[@]}"
+                          do
+                              if [[ "$i" == *.tf* ]]
+                              then
+                                  dir=$(dirname "${i}" | sed 's/\"//')
+                                  echo $dir
+                                  folders+=($dir)
+                              fi
+                          done
+
+                          result=$(printf ",%s" "${!folders[@]}")
+                          result=${result:1}
+
+                          export $result
+                    environmentVariables:
+                      - name: payload
+                        type: String
+                        value: <+trigger.payload>
+                    outputVariables:
+                      - name: folders
+                        type: String
+                        value: result
                   timeout: 10m
               - stepGroup:
                   name: terraform_stuff
