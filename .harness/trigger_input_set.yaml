@@ -1,10 +1,35 @@
 inputSet:
   name: trigger_input_set
+  tags: {}
   identifier: trigger_input_set
   orgIdentifier: default
   projectIdentifier: test
   pipeline:
     identifier: tf_trigger_pipeline
+    stages:
+      - stage:
+          identifier: Run_Terraform
+          type: Custom
+          spec:
+            execution:
+              steps:
+                - stepGroup:
+                    identifier: terraform_stuff
+                    steps:
+                      - step:
+                          identifier: TerraformPlan_1
+                          type: TerraformPlan
+                          spec:
+                            configuration:
+                              configFiles:
+                                store:
+                                  type: Github
+                                  spec:
+                                    folderPath: <+input>
+                    variables:
+                      - name: Folder
+                        type: String
+                        value: <+input>
     properties:
       ci:
         codebase:
@@ -12,3 +37,7 @@ inputSet:
             type: branch
             spec:
               branch: <+trigger.branch>
+    variables:
+      - name: PAYLOAD
+        type: String
+        value: <+trigger.payload>
