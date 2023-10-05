@@ -97,6 +97,7 @@ pipeline:
                   strategy:
                     matrix:
                       folders: <+execution.steps.ShellScript_1.output.outputVariables.folders>
+                      maxConcurrency: 2
         tags: {}
         failureStrategies:
           - onFailure:
