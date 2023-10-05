@@ -1,0 +1,41 @@
+pipeline:
+  name: tf_trigger_pipeline
+  identifier: tf_trigger_pipeline
+  projectIdentifier: test
+  orgIdentifier: default
+  tags: {}
+  stages:
+    - stage:
+        name: Run_Terraform
+        identifier: Run_Terraform
+        description: ""
+        type: Custom
+        spec:
+          execution:
+            steps:
+              - step:
+                  type: ShellScript
+                  name: ShellScript_1
+                  identifier: ShellScript_1
+                  spec:
+                    shell: Bash
+                    onDelegate: true
+                    source:
+                      type: Inline
+                      spec:
+                        script: echo "here we go!"
+                    environmentVariables: []
+                    outputVariables: []
+                  timeout: 10m
+        tags: {}
+        failureStrategies:
+          - onFailure:
+              errors: []
+              action:
+                type: MarkAsFailure
+  properties:
+    ci:
+      codebase:
+        connectorRef: account.Github
+        repoName: harness
+        build: <+input>
