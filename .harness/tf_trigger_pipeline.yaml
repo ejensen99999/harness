@@ -58,3 +58,9 @@ pipeline:
         connectorRef: account.Github
         repoName: harness
         build: <+input>
+  variables:
+    - name: CHANGED_FILES
+      type: String
+      description: ""
+      required: false
+      value: <+input>
