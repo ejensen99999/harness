@@ -49,6 +49,7 @@ pipeline:
                                   folderPath: <+input>
                                 type: Github
                             secretManagerRef: harnessSecretManager
+                            skipRefreshCommand: false
                         timeout: 10m
                     - step:
                         type: TerraformApply
