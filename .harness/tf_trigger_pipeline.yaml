@@ -66,6 +66,8 @@ pipeline:
                       value: <+input>
                       description: ""
                       required: true
+                  strategy:
+                    matrix: {}
         tags: {}
         failureStrategies:
           - onFailure:
