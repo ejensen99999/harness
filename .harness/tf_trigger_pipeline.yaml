@@ -27,25 +27,44 @@ pipeline:
                     environmentVariables: []
                     outputVariables: []
                   timeout: 10m
-              - step:
-                  type: TerraformPlan
-                  name: TerraformPlan_1
-                  identifier: TerraformPlan_1
-                  spec:
-                    provisionerIdentifier: output
-                    configuration:
-                      command: Apply
-                      configFiles:
-                        store:
-                          spec:
-                            connectorRef: account.Github
-                            repoName: harness
-                            gitFetchType: Branch
-                            branch: main
-                            folderPath: <+input>
-                          type: Github
-                      secretManagerRef: harnessSecretManager
-                  timeout: 10m
+              - stepGroup:
+                  name: terraform_stuff
+                  identifier: terraform_stuff
+                  steps:
+                    - step:
+                        type: TerraformPlan
+                        name: TerraformPlan_1
+                        identifier: TerraformPlan_1
+                        spec:
+                          provisionerIdentifier: output
+                          configuration:
+                            command: Apply
+                            configFiles:
+                              store:
+                                spec:
+                                  connectorRef: account.Github
+                                  repoName: harness
+                                  gitFetchType: Branch
+                                  branch: main
+                                  folderPath: <+input>
+                                type: Github
+                            secretManagerRef: harnessSecretManager
+                        timeout: 10m
+                    - step:
+                        type: TerraformApply
+                        name: TerraformApply_2
+                        identifier: TerraformApply_2
+                        spec:
+                          provisionerIdentifier: output
+                          configuration:
+                            type: InheritFromPlan
+                        timeout: 10m
+                  variables:
+                    - name: Folder
+                      type: String
+                      value: <+input>
+                      description: ""
+                      required: true
         tags: {}
         failureStrategies:
           - onFailure:
