@@ -56,7 +56,7 @@ pipeline:
                         value: <+trigger.payload>
                       - name: added
                         type: String
-                        value: <+trigger.payload.commits[].added>
+                        value: <+trigger.payload.commits[0].added>
                     outputVariables:
                       - name: folders
                         type: String
