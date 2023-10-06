@@ -26,9 +26,9 @@ pipeline:
                         script: |-
                           #!/usr/bin/env bash 
 
-                          sudo microdnf install epel-release -y
-                          sudo microdnf update -y
-                          sudo microdnf install jq -y
+                          microdnf install epel-release -y
+                          microdnf update -y
+                          microdnf install jq -y
 
                           json=$payload
 
