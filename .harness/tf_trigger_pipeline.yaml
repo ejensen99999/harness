@@ -26,10 +26,6 @@ pipeline:
                         script: |-
                           #!/usr/bin/env bash 
 
-                          microdnf install epel-release -y
-                          microdnf update -y
-                          microdnf install jq -y
-
                           json=$payload
 
                           readarray -t changes < <(echo $json | jq -c '.commits[] | [.added[], .removed[], .modified[]]' | jq -c '.[]')
