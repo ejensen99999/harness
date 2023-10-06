@@ -1,0 +1,112 @@
+pipeline:
+  name: tf_trigger_pipeline
+  identifier: tf_trigger_pipeline
+  projectIdentifier: test
+  orgIdentifier: default
+  tags: {}
+  stages:
+    - stage:
+        name: Run_Terraform
+        identifier: Run_Terraform
+        description: ""
+        type: Custom
+        spec:
+          execution:
+            steps:
+              - step:
+                  type: ShellScript
+                  name: ShellScript_1
+                  identifier: ShellScript_1
+                  spec:
+                    shell: Bash
+                    onDelegate: true
+                    source:
+                      type: Inline
+                      spec:
+                        script: |-
+                          #!/usr/bin/env bash 
+
+                          json=$payload
+
+                          readarray -t changes < <(echo $json | jq -c '.commits[] | [.added[], .removed[], .modified[]]' | jq -c '.[]')
+
+                          declare -A folders
+
+                          for i in "${changes[@]}"
+                          do
+                              if [[ "$i" == *.tf* ]]
+                              then
+                                  dir=$(dirname "${i}" | sed 's/\"//')
+                                  echo $dir
+                                  folders+=($dir)
+                              fi
+                          done
+
+                          result=$(printf ",%s" "${!folders[@]}")
+                          result=${result:1}
+
+                          export paths="[$result]"
+                    environmentVariables:
+                      - name: payload
+                        type: String
+                        value: <+trigger.payload>
+                    outputVariables:
+                      - name: folders
+                        type: String
+                        value: paths
+                  timeout: 10m
+              - stepGroup:
+                  name: terraform_stuff
+                  identifier: terraform_stuff
+                  steps:
+                    - step:
+                        type: TerraformPlan
+                        name: TerraformPlan_1
+                        identifier: TerraformPlan_1
+                        spec:
+                          provisionerIdentifier: output
+                          configuration:
+                            command: Apply
+                            configFiles:
+                              store:
+                                spec:
+                                  connectorRef: account.Github
+                                  repoName: harness
+                                  gitFetchType: Branch
+                                  branch: main
+                                  folderPath: <+repeat.item>
+                                type: Github
+                            secretManagerRef: harnessSecretManager
+                            skipRefreshCommand: false
+                        timeout: 10m
+                    - step:
+                        type: TerraformApply
+                        name: TerraformApply_2
+                        identifier: TerraformApply_2
+                        spec:
+                          provisionerIdentifier: output
+                          configuration:
+                            type: InheritFromPlan
+                        timeout: 10m
+                  strategy:
+                    repeat:
+                      items:
+                        - <+execution.steps.ShellScript_1.output.outputVariables.folders>
+        tags: {}
+        failureStrategies:
+          - onFailure:
+              errors: []
+              action:
+                type: MarkAsFailure
+  properties:
+    ci:
+      codebase:
+        connectorRef: account.Github
+        repoName: harness
+        build: <+input>
+  variables:
+    - name: PAYLOAD
+      type: String
+      description: ""
+      required: false
+      value: <+input>
