@@ -74,7 +74,7 @@ pipeline:
                                   repoName: harness
                                   gitFetchType: Branch
                                   branch: main
-                                  folderPath: <+input>
+                                  folderPath: <+repeat.item>
                                 type: Github
                             secretManagerRef: harnessSecretManager
                             skipRefreshCommand: false
