@@ -5,7 +5,6 @@ locals {
     name = "Onboarding Service"
 }
 
-
 resource "harness_platform_pipeline" "example" {
   identifier = local.identifier
   org_id     = local.org_id
