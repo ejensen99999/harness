@@ -8,7 +8,7 @@ locals {
 resource "harness_platform_pipeline" "example" {
   identifier = local.identifier
   org_id     = local.org_id
-  project_id = local.project_id
+  project_id = harness_platform_project.cdproject.id
   name       = local.name
   git_details {
     branch_name    = "main"

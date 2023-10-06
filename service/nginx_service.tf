@@ -3,6 +3,7 @@ locals {
     name = "nginx"
 }
 
+
 resource "harness_platform_service" "service" {
   identifier  = local.identifier ## Service Identifier
   name        = local.name ## Service Name to appear in Harness

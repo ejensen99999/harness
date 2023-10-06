@@ -1,15 +1,14 @@
 locals {
     identifier = "dev"
     org_id = "default"
-    project_id = "cdproduct"
     name = "dev"
 }
 
-resource "harness_platform_environment" "environment" {
+resource "harness_platform_environment" "dev_default_cdproject" {
   identifier = local.identifier ## Define Environment Identifier, this is unique to the project, org or account - where the environment will be created
   name       = local.name ## This will be the name of the environment that you will see in Harness UI
   org_id     = local.org_id ## Optional if you're creating at Account level
-  project_id = local.project_id ## optional if you're creating at Org or Acount
+  project_id = harness_platform_project.cdproject.id ## optional if you're creating at Org or Acount
   tags       = ["status:nonregulated", "owner:devops"]
   type       = "PreProduction"
   yaml = <<-EOT
@@ -17,7 +16,7 @@ resource "harness_platform_environment" "environment" {
          name:${local.name} ## Name of the environment, similar to above
          identifier: ${local.identifier} ## Name of the environment
          orgIdentifier: ${local.org_id}  
-         projectIdentifier: ${local.project_id} ## optional if your creating at Org or Acount, this is where the environment will be created
+         projectIdentifier: ${harness_platform_project.cdproject.id} ## optional if your creating at Org or Acount, this is where the environment will be created
          type: PreProduction
          tags:
            status: nonregulated
