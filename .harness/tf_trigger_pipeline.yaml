@@ -38,7 +38,7 @@ pipeline:
                               then
                                   dir=$(dirname "${i}" | sed 's/\"//')
                                   echo $dir
-                                  folders+=($dir)
+                                  folders+=([$dir])
                               fi
                           done
 
