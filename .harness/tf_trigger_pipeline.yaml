@@ -45,14 +45,11 @@ pipeline:
                           result=$(printf ",%s" "${!folders[@]}")
                           result=${result:1}
 
-                          export paths="[$result]"
+                          export paths=$result
                     environmentVariables:
                       - name: payload
                         type: String
                         value: <+trigger.payload>
-                      - name: added
-                        type: String
-                        value: <+trigger.payload.commits[0].modified>
                     outputVariables:
                       - name: folders
                         type: String
@@ -94,7 +91,7 @@ pipeline:
                   strategy:
                     repeat:
                       items:
-                        - <+execution.steps.ShellScript_1.output.outputVariables.folders>
+                        - <+execution.steps.ShellScript_1.output.outputVariables.folders.split(',')>
         tags: {}
         failureStrategies:
           - onFailure:
