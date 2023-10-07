@@ -13,7 +13,7 @@ do
     then
         dir=$(dirname "${i}" | sed 's/\"//')
         echo $dir
-        folders+=("\"$dir\"")
+        folders[$dir]=0
     fi
 done
 
