@@ -5,8 +5,9 @@ USER 0
 ENV TARGETARCH=amd64
 RUN microdnf install epel-release -y \
   && microdnf update -y \
-  && microdnf install jq -y \
-  && microdnf install --nodocs git \
+  && microdnf install jq -y 
+  
+RUN microdnf install --nodocs git \
   && microdnf install python38 \
   && microdnf install python38-pip \
   && python3 --version
