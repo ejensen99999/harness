@@ -3,7 +3,10 @@ FROM harness/delegate:23.10.80806.minimal
 USER 0
 
 ENV TARGETARCH=amd64
-RUN microdnf install --nodocs git \
+RUN microdnf install epel-release -y \
+  && microdnf update -y \
+  && microdnf install jq -y \
+  && microdnf install --nodocs git \
   && microdnf install python38 \
   && microdnf install python38-pip \
   && python3 --version
