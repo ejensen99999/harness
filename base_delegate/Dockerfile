@@ -3,9 +3,9 @@ FROM harness/delegate:23.10.80806.minimal
 USER 0
 
 ENV TARGETARCH=amd64
-RUN microdnf install jq -y 
 
 RUN microdnf install --nodocs git \
+  && microdnf install jq -y \
   && microdnf install python38 \
   && microdnf install python38-pip \
   && python3 --version
