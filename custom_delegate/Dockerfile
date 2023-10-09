@@ -11,6 +11,8 @@ RUN apt install software-properties-common -y \
 RUN apt install -y git \
   && apt install -y jq \
   && apt install -y python3.8 \
+  && apt install -y python3-pip \
+  && python -m pip install pip \
   && python3 --version
 
 RUN mkdir -m 777 -p client-tools/kubectl/v1.24.3 \
@@ -39,7 +41,7 @@ RUN mkdir -m 777 -p client-tools/kubectl/v1.24.3 \
   && chgrp -R 0 /opt/harness-delegate  \
   && chown -R 1001 /opt/harness-delegate
 
-RUN python3 -m pip install azure-cli==2.52.0 \
+RUN pip3 install azure-cli==2.52.0 \
   && apt autoremove 
 
 ENV PATH=/opt/harness-delegate/client-tools/kubectl/v1.24.3/:$PATH
