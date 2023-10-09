@@ -11,7 +11,6 @@ RUN apt install software-properties-common -y \
 RUN apt install -y git \
   && apt install -y jq \
   && apt install -y python3.8 \
-  && apt install -y python3.8-pip \
   && python3 --version
 
 RUN mkdir -m 777 -p client-tools/kubectl/v1.24.3 \
