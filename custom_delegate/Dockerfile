@@ -12,7 +12,7 @@ RUN apt install -y git \
   && apt install -y jq \
   && apt install -y python3.8 \
   && apt install -y python3-pip \
-  && python -m pip install pip \
+  && python3 -m pip install pip \
   && python3 --version
 
 RUN mkdir -m 777 -p client-tools/kubectl/v1.24.3 \
