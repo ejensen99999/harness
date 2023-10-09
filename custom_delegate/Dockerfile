@@ -39,7 +39,7 @@ RUN mkdir -m 777 -p client-tools/kubectl/v1.24.3 \
   && chgrp -R 0 /opt/harness-delegate  \
   && chown -R 1001 /opt/harness-delegate
 
-RUN pip install azure-cli==2.52.0 \
+RUN python3 -m pip install azure-cli==2.52.0 \
   && apt autoremove 
 
 ENV PATH=/opt/harness-delegate/client-tools/kubectl/v1.24.3/:$PATH
