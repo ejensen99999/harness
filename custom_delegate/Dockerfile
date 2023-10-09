@@ -4,8 +4,7 @@ USER 0
 
 ENV TARGETARCH=amd64
 
-RUN apt install -y --nodocs git \
-  && apt install -y jq python38 python38-pip \
+RUN apt install -y git jq python38 python38-pip \
   && python3 --version
 
 RUN mkdir -m 777 -p client-tools/kubectl/v1.24.3 \
