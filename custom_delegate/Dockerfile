@@ -4,6 +4,7 @@ USER 0
 
 ENV TARGETARCH=amd64
 
+RUN apt install software-properties-common -y
 RUN add-apt-repository -y 'ppa:deadsnakes/ppa' \
   && add-apt-repository -y 'ppa:git-core/ppa' 
 RUN  apt install -y git jq python38 python38-pip \
