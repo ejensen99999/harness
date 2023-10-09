@@ -4,10 +4,14 @@ USER 0
 
 ENV TARGETARCH=amd64
 
-RUN apt install software-properties-common -y
-RUN add-apt-repository -y 'ppa:deadsnakes/ppa' \
-  && add-apt-repository -y 'ppa:git-core/ppa' 
-RUN  apt install -y git jq python38 python38-pip \
+RUN apt install software-properties-common -y \
+  && add-apt-repository -y 'ppa:deadsnakes/ppa' \
+  && add-apt-repository -y 'ppa:git-core/ppa'
+
+RUN apt install -y git \
+  && apt install -y jq \
+  && apt install -y python38 \
+  && apt install -y python38-pip \
   && python3 --version
 
 RUN mkdir -m 777 -p client-tools/kubectl/v1.24.3 \
