@@ -1,0 +1,92 @@
+---
+- name: Load Linux Variables
+  ansible.builtin.include_vars: linux.json
+
+- name: Create Kubernetes template
+  local_action:
+    module: ansible.builtin.template
+    src: ../agent/runner_deploy.yml.j2
+    dest: ../agent/{{ kube_name }}.yml
+  run_once: True
+
+- name: Install Dumb-Init
+  ansible.builtin.script:
+    cmd: "dumbInit.sh"
+  environment:
+    TARGETPLATFORM: "{{ targetPlatform }}"
+    DUMB_INIT_VERSION: "{{ dumbInitVersion }}"
+
+- name: Install Docker
+  ansible.builtin.script:
+    cmd: "docker.sh"
+  environment:
+    TARGETPLATFORM: "{{ targetPlatform }}"
+    DOCKER_CHANNEL: "{{ dockerChannel }}"
+    DOCKER_VERSION: "{{ dockerVersion }}"
+    DOCKER_COMPOSE_VERSION: "{{ dockerComposeVersion }}"
+
+- name: Install Docker shims
+  ansible.builtin.script:
+    cmd: "docker-shim.sh"
+  environment:
+    TARGETPLATFORM: "{{ targetPlatform }}"
+    DOCKER_CHANNEL: "{{ dockerChannel }}"
+    DOCKER_VERSION: "{{ dockerVersion }}"
+    DOCKER_COMPOSE_VERSION: "{{ dockerComposeVersion }}"
+
+- name: Install Github Runner Client
+  ansible.builtin.script:
+    cmd: "runner.sh"
+  environment:
+    TARGETPLATFORM: "{{ targetPlatform }}"
+    RUNNER_HOOKS_DIR: "{{ runnerHooksDir }}"
+    RUNNER_ASSETS_DIR: "{{ runnerAssetsDir }}"
+    RUNNER_HOME: "{{ runnerDir }}"
+    RUNNER_CONTAINER_HOOKS_VERSION: "{{ runnerHooksVersion }}"
+
+- name: Install Tool Cache
+  ansible.builtin.script:
+    cmd:  cache.sh
+
+- name: Copy startup Files
+  ansible.builtin.copy:
+    src: "{{ item }}"
+    dest: "/usr/bin/"
+    mode: +x
+  loop:
+    - entrypoint.sh
+    - logger.bash
+    - startup.sh
+    - update-status
+
+- name: Copy Supervisor Files
+  ansible.builtin.copy:
+    src: "supervisor/dockerd.conf"
+    dest: "/etc/supervisor/conf.d/"
+
+- name: Copy Hooks Files
+  ansible.builtin.synchronize:
+    src: "hooks/"
+    dest: "/etc/arc/hooks/"
+
+- name: Set hooks Permissions
+  ansible.builtin.shell: |
+    chown runner:runner -R /etc/arc/hooks/
+    chmod 775 -R  /etc/arc/hooks/
+  args:
+    executable: /bin/bash
+
+- name: Copy certificate Files
+  ansible.builtin.copy:
+    src: "root-ca-extendhealth.cer"
+    dest: "/usr/local/share/ca-certificates/"
+
+- name: Update certificates
+  ansible.builtin.shell: update-ca-certificates
+
+- name: Install Environment
+  ansible.builtin.script:
+    cmd: "{{ item }}"
+  loop:
+    - docker-config.sh
+    - environment.sh

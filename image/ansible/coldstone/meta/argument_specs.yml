@@ -1,0 +1,11 @@
+---
+
+argument_specs:
+  main:
+    short_description: "Main entry point for the coldstone provisioner"
+    author: Eric Jensen
+    options:
+      platform:
+        type: "str"
+        required: True
+        description: "linux or windows"

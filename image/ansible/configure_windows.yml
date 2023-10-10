@@ -1,0 +1,8 @@
+---
+- name: "Provision Windows Image"
+  hosts: default
+  
+  roles:
+    - role: ./coldstone
+      platform: windows
+

@@ -1,0 +1,72 @@
+---
+- block:
+    - name: Execute Pre-run Scripts
+      ansible.builtin.script:
+        cmd: "../{{ source_dir }}/{{item}}"
+      loop: "{{ cs_prescripts }}"
+      register: prescript_output
+
+    - name: Pre-run Script results
+      ansible.builtin.debug:
+        msg: "{{ item.stdout }}"
+      loop: "{{ prescript_output.results }}"
+  when: cs_prescripts is defined
+
+- block:
+    - name: Execute Apt Install
+      ansible.builtin.apt:
+        pkg: "{{cs_apts}}"
+        state: present
+        install_recommends: no
+        update_cache: yes
+
+    - name: Cleanup Apt cache
+      ansible.builtin.script:
+        cmd: aptCleanup.sh
+  when: cs_apts is defined
+
+- name: Execute Pip Install
+  ansible.builtin.pip:
+    name: "{{ cs_pips }}"
+  when: cs_pips is defined
+
+- block:
+    - name: Execute Pipx Install
+      community.general.pipx:
+        name: "{{item}}"
+      loop: "{{ cs_pipx }}"
+      register: pipx_output
+
+    - name: Pipx results
+      ansible.builtin.debug:
+        msg: "{{ item.stdout }}"
+      loop: "{{ pipx_output.results }}"
+  when: cs_pipx is defined
+
+- block:
+    - name: Execute Npm Install
+      community.general.npm:
+        name: "{{item}}"
+        global: yes
+      loop: "{{ cs_npms }}"
+      register: npm_output
+
+    - name: Npm results
+      ansible.builtin.debug:
+        msg: "{{ item }}"
+      loop: "{{ npm_output.results }}"
+      when: npm_output.results is defined
+  when: cs_npms is defined
+
+- block:
+    - name: Execute Post-Run Scripts
+      ansible.builtin.script:
+        cmd: "../{{ source_dir }}/{{item}}"
+      loop: "{{ cs_postscripts }}"
+      register: postscript_outputs
+
+    - name: Post-run Script results
+      ansible.builtin.debug:
+        msg: "{{ item.stdout }}"
+      loop: "{{ postscript_outputs.results }}"
+  when: cs_postscripts is defined

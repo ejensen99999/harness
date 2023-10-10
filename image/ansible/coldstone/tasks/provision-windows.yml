@@ -1,0 +1,132 @@
+---
+- block:
+    - name: Create includes directory
+      ansible.windows.win_file:
+        path: "{{ includeDir }}"
+        state: directory
+
+    - name: Copy include file assets to runner image"
+      ansible.windows.win_copy:
+        src: "../{{ source_dir }}/{{ item }}"
+        dest: "{{ includeDir }}"
+      loop: "{{ cs_includes }}"
+      register: includes_output
+
+    - name: Include transfer results
+      ansible.builtin.debug:
+        msg: "{{ item }}"
+      loop: "{{ includes_output.results }}"
+  when: cs_includes is defined
+
+
+- block:
+    - name: Execute Pre-run Scripts
+      ansible.builtin.script:
+        cmd: "../{{ source_dir }}/{{item}}"
+      environment:
+        INCLUDE_DIR: "{{includeDir}}"
+      loop: "{{ cs_prescripts }}"
+      register: prescript_output
+
+    - name: Pre-run Script results
+      ansible.builtin.debug:
+        msg: "{{ item.stdout }}"
+      loop: "{{ prescript_output.results }}"
+  when: cs_prescripts is defined
+
+- block:
+    - name: Powershell Modules
+      win_psmodule:
+        name: "{{ item }}"
+        allow_clobber: yes
+      loop: "{{ cs_psms }}"
+
+    - name: Change gallery to trusted
+      community.windows.win_psrepository:
+        name: PSGallery
+        installation_policy: trusted
+  when: cs_psms is defined
+
+- block:
+    - name: Pip - Generate Multi List
+      set_fact:
+        pip_multi: "{{ pip_multi | default('') + item + ' ' }}"
+      when: not item is search(" ")
+      loop: "{{ cs_pips }}"
+
+    - name: Pip Install for Multi
+      ansible.windows.win_command: pip install {{ pip_multi }}
+  
+    - name: Pip Install for Single
+      ansible.windows.win_command: pip install {{ item }}
+      when: item is search(" ")
+      loop: "{{ cs_pips }}"
+  when: cs_pips is defined
+
+- block:
+    - name: Set Empty Value
+      set_fact:
+        choco_multi: []
+
+    - name: Choco - Generate Multi List
+      set_fact:
+        choco_multi: "{{ choco_multi }} + [ '{{ item }}' ]"  
+      when: not item is search(" ")
+      loop: "{{ cs_chocos }}"
+
+    - name: Choco Install for Multi
+      win_chocolatey: 
+        name: "{{ choco_multi }}"
+
+    - name: Choco Install for Single
+      ansible.windows.win_command: choco install -y {{ item }}
+      when: item is search(" ")
+      loop: "{{ cs_chocos }}"
+  when: cs_chocos is defined
+
+- block:
+    - name: Execute Pipx Install
+      community.general.pipx:
+        name: "{{item}}"
+      loop: "{{ cs_pipx }}"
+      register: pipx_output
+
+    - name: Pipx results
+      ansible.builtin.debug:
+        msg: "{{ item.stdout }}"
+      loop: "{{ pipx_output.results }}"
+  when: cs_pipx is defined
+
+- block:
+    - name: NPM - Generate Multi List
+      set_fact:
+        npm_multi: "{{ npm_multi | default('') + item + ' ' }}"
+      when: not item is search(" ")
+      loop: "{{ cs_npms }}"
+
+    - name: NPM Install for Multi
+      ansible.windows.win_shell: npm install -g {{ npm_multi }}
+
+    - name: NPM Install for Single
+      ansible.windows.win_shell: npm install -g {{ item }}
+      when: item is search(" ")
+      loop: "{{ cs_npms }}"
+  when: cs_npms is defined
+
+- block:
+    - name: Execute Post-Run Scripts
+      ansible.builtin.script:
+        cmd: "../{{ source_dir }}/{{item}}"
+      environment:
+        INCLUDE_DIR: "{{includeDir}}"
+        ACTION_PASS: "{{actionPassword}}"
+        INSTALL_USER: "{{install_user}}"
+        INSTALL_PASS: "{{install_password}}"
+      loop: "{{ cs_postscripts }}"
+      register: postscript_outputs
+
+    - name: Post-run Script results
+      ansible.builtin.debug:
+        msg: "{{ item.stdout }}"
+      loop: "{{ postscript_outputs.results }}"
+  when: cs_postscripts is defined

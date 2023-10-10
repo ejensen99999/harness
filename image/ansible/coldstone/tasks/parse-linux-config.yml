@@ -1,0 +1,33 @@
+---
+
+- name: Add Configuration
+  ansible.builtin.include_vars:
+    file: "../{{ source_dir }}/{{ config }}"
+
+- ansible.builtin.set_fact:
+    cs_includes: "{{ hostvars.default.installers.includes }}"
+  when: hostvars.default.installers.includes is defined
+
+- ansible.builtin.set_fact:
+    cs_prescripts: "{{ hostvars.default.installers.prescripts }}"
+  when: hostvars.default.installers.prescripts is defined
+
+- ansible.builtin.set_fact:
+    cs_apts: "{{ hostvars.default.installers.apt }}"
+  when: hostvars.default.installers.apt is defined
+
+- ansible.builtin.set_fact:
+    cs_pips: "{{ hostvars.default.installers.pip }}"
+  when: hostvars.default.installers.pip is defined
+
+- ansible.builtin.set_fact:
+    cs_pipx: "{{ hostvars.default.installers.pipx }}"
+  when: hostvars.default.installers.pipx is defined
+
+- ansible.builtin.set_fact:
+    cs_npms: "{{ hostvars.default.installers.npm }}"
+  when: hostvars.default.installers.npm is defined
+
+- ansible.builtin.set_fact:
+    cs_postscripts: "{{ hostvars.default.installers.postscripts }}"
+  when: hostvars.default.installers.postscripts is defined

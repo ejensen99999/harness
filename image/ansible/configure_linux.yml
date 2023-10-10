@@ -1,0 +1,8 @@
+---
+- name: "Provision Linux Image"
+  hosts: default
+  #become: true
+
+  roles:
+    - role: ./coldstone
+      platform: linux

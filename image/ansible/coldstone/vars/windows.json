@@ -1,0 +1,13 @@
+{
+    "runnerAssetsDir" : "/runnertmp",
+    "runnerDir" : "/runner",
+    "runnerHooksVersion": "0.1.2",
+    "runnerHooksDir": "/etc/arc/hooks/",
+    "runnerVersion" : "2.298.0",
+    "dockerChannel" : "stable",
+    "dockerVersion" : "20.10.18",
+    "dumbInitVersion" : "1.2.5",
+    "targetPlatform" : "linux/amd64",
+    "includeDir": "c:/includes",
+    "actionPassword": "?What3vR!"
+}

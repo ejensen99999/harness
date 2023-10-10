@@ -1,0 +1,23 @@
+---
+
+# - name: Load configuration values
+#   ansible.builtin.include_tasks:  parse-windows-config.yml
+
+- name: Prepare Windows Run
+  ansible.builtin.include_tasks:  prep-windows.yml
+
+- name: Provision Windows
+  ansible.builtin.include_tasks:  provision-windows.yml
+
+- name: Copy include file assets to runner image"
+  ansible.windows.win_copy:
+    src: "root-ca-extendhealth.cer"
+    dest: "C:/Temp/"
+
+- name: Import pfx certificate
+  ansible.windows.win_certificate_store:
+    path: "C:/Temp/root-ca-extendhealth.cer"
+    state: present
+    store_location: LocalMachine
+    store_name: Root
+    key_storage: machine
