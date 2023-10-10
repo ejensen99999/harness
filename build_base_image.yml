@@ -33,7 +33,7 @@ stages:
       displayName: Build an image
       inputs:
         containerRegistry: 'dockerhub'
-        repository: 'delegate-base'
+        repository: 'ejensen99999/delegate-base'
         command: 'buildAndPush'
         Dockerfile: '$(Build.SourcesDirectory)/base_delegate/Dockerfile'
         tags: |
