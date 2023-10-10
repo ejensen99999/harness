@@ -12,7 +12,8 @@ trigger:
       - image/*
 
 pool:
-  vmImage: ubuntu-latest
+  name: linux 
+  #vmImage: ubuntu-latest
 
 steps:
 - script: echo Hello, world!
