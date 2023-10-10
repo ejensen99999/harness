@@ -21,8 +21,12 @@ steps:
 
 - task: CopyFiles@2
   displayName: 'Copy Packer files to artifacts'
-  
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+  inputs:
+    SourceFolder: image
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    CleanTargetFolder: true
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    TargetPath: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: PackerConfig
