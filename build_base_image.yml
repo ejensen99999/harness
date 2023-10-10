@@ -9,7 +9,7 @@ resources:
 - repo: self
 
 variables:
-  tag: '$(Build.BuildId)'
+  tag: $[counter(format('$(Build.BuildId){0:yyyyMMdd}', pipeline.startTime), 100)]
 
 stages:
 - stage: Build
@@ -28,3 +28,4 @@ stages:
         dockerfile: '$(Build.SourcesDirectory)/base_delegate/Dockerfile'
         tags: |
           $(tag)
+
