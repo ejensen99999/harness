@@ -9,7 +9,7 @@ resources:
 - repo: self
 
 variables:
-  tag: $[counter(format('$(Build.BuildId){0:yyyyMMdd}', pipeline.startTime), 100)]
+  tag: '$(Build.BuildId)'
 
 stages:
 - stage: Build
