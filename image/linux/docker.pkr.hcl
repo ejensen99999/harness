@@ -53,8 +53,7 @@ build {
         inline = [
             "chmod -R 777 /support",
             "/support/standup.sh",
-            "/support/enableSSH.sh",
-            ""
+            
         ]
     }
 
