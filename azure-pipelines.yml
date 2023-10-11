@@ -30,9 +30,9 @@ steps:
 - task: UsePythonVersion@0
   displayName: "Install Python"
   inputs:
-    versionSpec: '3.7.3'
+    versionSpec: '3.8'
     addToPath: true
-    architecture: 'x64'
+    #architecture: 'x64'
 
 - task: Bash@3
   displayName: "Install Ansible"
