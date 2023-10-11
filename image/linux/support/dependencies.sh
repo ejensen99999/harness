@@ -1,10 +1,10 @@
 #!/bin/bash -e
 
 curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
-sudo apt-add-repository --yes "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
-sudo add-apt-repository --yes --update ppa:ansible/ansible
-sudo apt-get update
-sudo apt-get install -y \
+apt-add-repository --yes "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+add-apt-repository --yes --update ppa:ansible/ansible
+apt-get update
+apt-get install -y \
     ansible \
     ca-certificates \
     curl \
@@ -17,7 +17,7 @@ sudo apt-get install -y \
 # which ansible-playbook
 user=$(whoami)
 
-sudo chmod 777 -R /home/$user/.ansible
+#sudo chmod 777 -R /home/$user/.ansible
 
 # echo "What version is it?"
 # ansible-playbook --version
