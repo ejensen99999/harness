@@ -32,6 +32,6 @@ steps:
 
 - task: Packer@1
   inputs:
+    connectedServiceType: 'none'
     templatePath: '$(Build.ArtifactStagingDirectory)/image/linux/docker.pkr.hcl'
     command: 'init'
-
