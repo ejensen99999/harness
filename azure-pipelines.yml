@@ -26,6 +26,16 @@ steps:
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
     CleanTargetFolder: true
 
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Write your commands here
+      
+      pwd
+      
+      ls -al
+
 - task: PackerTool@0
   inputs:
     version: 
