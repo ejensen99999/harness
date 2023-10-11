@@ -19,12 +19,12 @@ steps:
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
 
-- task: CopyFiles@2
-  displayName: 'Copy Packer files to artifacts'
-  inputs:
-    SourceFolder: image
-    TargetFolder: '$(Build.ArtifactStagingDirectory)'
-    CleanTargetFolder: true
+# - task: CopyFiles@2
+#   displayName: 'Copy Packer files to artifacts'
+#   inputs:
+#     SourceFolder: image
+#     TargetFolder: '$(Build.ArtifactStagingDirectory)'
+#     CleanTargetFolder: true
 
 - task: Bash@3
   inputs:
