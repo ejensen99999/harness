@@ -3,13 +3,12 @@ variable "EMAIL" { type = string }
 variable "NAME" {  type = string }
 variable "LABELS" { default = ["harness", "ubuntu20.04", "linux"]}
 
-variable "SOURCE_REPO" { type = string }
 variable "IMAGE_REGISTRY_PATH" { type = string }
 
 locals {
   provisioning  = "${path.root}/ansible"
   support_folder = "${path.root}/support"
-  scripts = "${path.root}/config"
+  scripts = "${path.root}/configs"
   TEMPLATE_DIR   = path.root
 }
 
@@ -25,15 +24,6 @@ packer {
 source "docker" "delegate-linux" {
     image = "harness/delegate:latest"
     commit = true
-    // changes = [
-    //     "WORKDIR ${var.WORKING_DIR}",
-    //     "EXPOSE 22",
-    //     "ENV GITHUB_PAT ${var.GITHUB_PAT}",
-    //     "ENV GITHUB_OWNER ${var.GITHUB_OWNER}",
-    //     "ENV GITHUB_INSTALL ${var.GITHUB_INSTALL}",
-    //     "ENV GITHUB_DOWNLOAD ${var.GITHUB_DOWNLOAD}",
-    //     "ENV GITHUB_REPOSITORY ${var.GITHUB_REPOSITORY}",
-    // ]
 }
 
 build { 
@@ -59,8 +49,8 @@ build {
         inline = [
             "chmod -R 777 /support",
             "/support/standup.sh",
-            "/support/addUser.sh",
-            "/support/enableSSH.sh"
+            "/support/enableSSH.sh",
+            ""
         ]
     }
 

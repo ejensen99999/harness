@@ -1,0 +1,28 @@
+{
+  "platform": "linux",
+  "description": "linux-specific-agent v7",
+  "version": "1",
+  "installers": {
+    "prescripts": [],
+    "apt": [
+      "ansible",
+      "nodejs",
+      "git-all"
+    ],
+    "pip": [
+      "pywinrm"
+    ],
+    "postscripts": [
+      "scripts/add_kubectl.sh",
+      "scripts/add_kustomize.sh",
+      "scripts/add_chartmuseum.sh",
+      "scripts/add_go_template.sh",
+      "scripts/add_helm.sh",
+      "scripts/add_oc.sh",
+      "scripts/add_pywinrm.sh",
+      "scripts/add_scm.sh",
+      "scripts/add_terraform.sh",
+      "scripts/set_harness_dir_perms.sh"
+    ]
+  }
+}
