@@ -34,7 +34,7 @@ steps:
       
       pwd
       
-      ls -al
+      ls -al $(Build.ArtifactStagingDirectory)/image/linux
 
 - task: PackerTool@0
   inputs:
