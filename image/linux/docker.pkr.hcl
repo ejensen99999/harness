@@ -6,7 +6,7 @@ variable "LABELS" { default = ["harness", "ubuntu20.04", "linux"]}
 variable "IMAGE_REGISTRY_PATH" { type = string }
 
 locals {
-  provisioning  = "${path.root}/ansible"
+  provisioning  = "${path.root}/../ansible"
   support_folder = "${path.root}/support"
   scripts = "${path.root}/configs"
   TEMPLATE_DIR   = path.root
