@@ -74,8 +74,6 @@ build {
             ,"image_registry_path=${var.IMAGE_REGISTRY_PATH}"
             ,"-e"
             ,"source_dir=${local.scripts}"
-            ,"-e"
-            ,"working_dir=${var.WORKING_DIR}"
         ]
     }
 
