@@ -34,7 +34,7 @@ steps:
       
       pwd
       
-      ls -al $(Build.ArtifactStagingDirectory)/image/linux
+      ls -al image/linux
 
 - task: PackerTool@0
   inputs:
@@ -43,5 +43,5 @@ steps:
 - task: Packer@1
   inputs:
     connectedServiceType: 'none'
-    templatePath: '$(Build.ArtifactStagingDirectory)/image/linux/docker.pkr.hcl'
+    templatePath: 'image/linux/docker.pkr.hcl'
     command: 'init'
