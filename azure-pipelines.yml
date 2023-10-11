@@ -26,20 +26,11 @@ steps:
       pwd
       
       ls -al image/ansible
-- task: UsePythonVersion@0
-  displayName: "Install Python"
+
+- - task: Ansible@0
   inputs:
-    versionSpec: '3.8'
-    allowUnstable: true
-    addToPath: true
-    architecture: 'x64'
-    disableDownloadFromRegistry: true
-- task: Bash@3
-  displayName: "Install Ansible"
-  inputs:
-    targetType: 'inline'
-    script: |
-      python3 -m pip install --user ansible
+    ansibleInterface: 'agentMachine'
+    inventoriesAgentMachine: 'noInventory'
 
 - task: PackerTool@0
   displayName: "Packer Load"
