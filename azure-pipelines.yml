@@ -26,6 +26,8 @@ steps:
       
       ls -al image/ansible
 
+
+
 - task: PackerTool@0
   displayName: "Packer Load"
   inputs:
