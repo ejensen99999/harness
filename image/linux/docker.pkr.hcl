@@ -2,8 +2,9 @@ variable "CONFIG" { type = string }
 variable "EMAIL" { type = string }
 variable "NAME" {  type = string }
 variable "LABELS" { default = ["harness", "ubuntu20.04", "linux"]}
-
 variable "IMAGE_REGISTRY_PATH" { type = string }
+
+variable "ansible_connection" { default = "docker" }
 
 locals {
   provisioning  = "${path.root}/../ansible"
@@ -60,19 +61,20 @@ build {
     provisioner "ansible" {
         playbook_file = "${local.provisioning}/configure_linux.yml"
         groups = ["linux"]
-        extra_arguments = [
-            "-e"
-            ,"config=${var.CONFIG}"
-            ,"-e"
-            ,"kube_name=${var.NAME}"
-            ,"-e"
-            ,"kube_namespace=harness" 
-            ,"-e"
-            ,"kube_platform=linux"
-            ,"-e"
-            ,"image_registry_path=${var.IMAGE_REGISTRY_PATH}"
-            ,"-e"
-            ,"source_dir=${local.scripts}"
+        extra_arguments = ["--extra-vars",
+            "ansible_connection=${var.ansible_connection}",
+            "-e",
+            "config=${var.CONFIG}",
+            "-e",
+            "kube_name=${var.NAME}",
+            "-e",
+            "kube_namespace=harness" ,
+            "-e",
+            "kube_platform=linux",
+            "-e",
+            "image_registry_path=${var.IMAGE_REGISTRY_PATH}",
+            "-e",
+            "source_dir=${local.scripts}"
         ]
     }
 
