@@ -1,8 +1,5 @@
 ---
 
-# - name: Load configuration values
-#   ansible.builtin.include_tasks:  parse-linux-config.yml
-
 - name: Prepare Linux Run
   ansible.builtin.include_tasks:  prep-linux.yml
 

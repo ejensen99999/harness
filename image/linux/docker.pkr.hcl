@@ -1,3 +1,18 @@
+variable "CONFIG" { type = string }
+variable "EMAIL" { type = string }
+variable "NAME" {  type = string }
+variable "LABELS" { default = ["harness", "ubuntu20.04", "linux"]}
+
+variable "SOURCE_REPO" { type = string }
+variable "IMAGE_REGISTRY_PATH" { type = string }
+
+locals {
+  provisioning  = "${path.root}/ansible"
+  support_folder = "${path.root}/support"
+  scripts = "${path.root}/config"
+  TEMPLATE_DIR   = path.root
+}
+
 packer {
     required_plugins {
         docker = {
@@ -7,33 +22,23 @@ packer {
     }
 }
 
-source "docker" "coldstone-linux" {
-    image = "ubuntu:20.04"
+source "docker" "delegate-linux" {
+    image = "harness/delegate:latest"
     commit = true
-    changes = [
-        "WORKDIR ${var.WORKING_DIR}",
-        "EXPOSE 22",
-        "ENV GITHUB_PAT ${var.GITHUB_PAT}",
-        "ENV GITHUB_OWNER ${var.GITHUB_OWNER}",
-        "ENV GITHUB_INSTALL ${var.GITHUB_INSTALL}",
-        "ENV GITHUB_DOWNLOAD ${var.GITHUB_DOWNLOAD}",
-        "ENV GITHUB_REPOSITORY ${var.GITHUB_REPOSITORY}",
-        "ENV RUNNER_DIR ${var.RUNNER_DIR}",
-        "ENV RUNNER_EPHEMERAL ${var.RUNNER_EPHEMERAL}",
-        "ENV RUNNER_LABELS coldstone,${var.NAME}",
-        "ENV RUNNER_NAME ${var.NAME}",
-        "ENV RUNNER_ORG ${var.GITHUB_OWNER}",
-        "ENV RUNNER_WORKDIR _work",
-        "VOLUME /var/lib/docker", 
-        "USER runner",
-        "ENTRYPOINT [\"/usr/local/bin/dumb-init\", \"--\"]",
-        "CMD [\"startup.sh\"]"
-    ]
+    // changes = [
+    //     "WORKDIR ${var.WORKING_DIR}",
+    //     "EXPOSE 22",
+    //     "ENV GITHUB_PAT ${var.GITHUB_PAT}",
+    //     "ENV GITHUB_OWNER ${var.GITHUB_OWNER}",
+    //     "ENV GITHUB_INSTALL ${var.GITHUB_INSTALL}",
+    //     "ENV GITHUB_DOWNLOAD ${var.GITHUB_DOWNLOAD}",
+    //     "ENV GITHUB_REPOSITORY ${var.GITHUB_REPOSITORY}",
+    // ]
 }
 
 build { 
     name = "base"
-    sources = ["sources.docker.coldstone-linux"]
+    sources = ["sources.docker.delegate-linux"]
 
     provisioner "shell" {
         inline = [
@@ -63,14 +68,27 @@ build {
         playbook_file = "${local.provisioning}/configure_linux.yml"
         groups = ["linux"]
         extra_arguments = [
-            "--extra-vars", "config=${var.CONFIG} kube_name=${var.NAME} kube_namespace=${var.GITHUB_OWNER} kube_platform=linux image_registry_path=${var.IMAGE_REGISTRY_PATH} source_dir=${var.SOURCE_REPO} working_dir=${var.WORKING_DIR}"
+            "-e"
+            ,"config=${var.CONFIG}"
+            ,"-e"
+            ,"kube_name=${var.NAME}"
+            ,"-e"
+            ,"kube_namespace=${var.GITHUB_OWNER}" 
+            ,"-e"
+            ,"kube_platform=linux"
+            ,"-e"
+            ,"image_registry_path=${var.IMAGE_REGISTRY_PATH}"
+            ,"-e"
+            ,"source_dir=${local.scripts}"
+            ,"-e"
+            ,"working_dir=${var.WORKING_DIR}"
         ]
     }
 
     post-processors {
         post-processor "docker-tag" {
             repository = "${var.IMAGE_REGISTRY_PATH}"
-            tags = ["coldstone", "linux", "ubuntu20.04"]
+            tags = ["harness-delegate", "linux", "ubuntu20.04"]
         }
     }
 }

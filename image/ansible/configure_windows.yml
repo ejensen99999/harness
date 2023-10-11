@@ -3,6 +3,6 @@
   hosts: default
   
   roles:
-    - role: ./coldstone
+    - role: ./harness
       platform: windows
 
