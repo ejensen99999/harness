@@ -27,16 +27,19 @@ steps:
       ls -al .harness
 
 - task: PackerTool@0
+  displayName: "Packer Load"
   inputs:
     version: 
 
 - task: Packer@1
+  displayName: "Packer Init"
   inputs:
     connectedServiceType: 'none'
     templatePath: 'image/linux/docker.pkr.hcl'
     command: 'init'
 
 - task: Packer@1
+  displayName: "Packer Build"
   inputs:
     connectedServiceType: 'none'
     templatePath: 'image/linux/docker.pkr.hcl'
