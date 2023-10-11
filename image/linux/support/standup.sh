@@ -40,7 +40,6 @@ echo "deb [signed-by=/etc/apt/trusted.gpg.d/nodesource.gpg] https://deb.nodesour
 add-apt-repository -y ppa:deadsnakes/ppa
 add-apt-repository -y ppa:ansible/ansible
 add-apt-repository -y ppa:apt-fast/stable
-add-apt-repository -y ppa:ubuntu-toolchain-r/stable
 add-apt-repository -y ppa:git-core/ppa
 add-apt-repository -y "${REPO_ARGS1}"
 add-apt-repository -y "${REPO_ARGS2}"
