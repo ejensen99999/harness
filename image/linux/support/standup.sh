@@ -46,7 +46,6 @@ add-apt-repository -y "${REPO_ARGS1}"
 add-apt-repository -y "${REPO_ARGS2}"
 add-apt-repository -y https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/
 apt-add-repository -y "deb https://apt.kubernetes.io/ kubernetes-xenial main"
-apt-add-repository --yes "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
 
 #curl -fsSL https://deb.nodesource.com/setup_lts.x | bash -
 
