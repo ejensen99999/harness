@@ -67,7 +67,7 @@ build {
             ,"-e"
             ,"kube_name=${var.NAME}"
             ,"-e"
-            ,"kube_namespace=${var.GITHUB_OWNER}" 
+            ,"kube_namespace=harness" 
             ,"-e"
             ,"kube_platform=linux"
             ,"-e"
