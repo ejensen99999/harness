@@ -35,3 +35,14 @@ steps:
     connectedServiceType: 'none'
     templatePath: 'image/linux/docker.pkr.hcl'
     command: 'init'
+
+- task: Packer@1
+  inputs:
+    connectedServiceType: 'none'
+    templatePath: 'image/linux/docker.pkr.hcl'
+    command: 'build'
+    variables: |
+      CONFIG=configs/custom-job-delegate.hd.json
+      EMAIL=ejensen99999@comcast.net
+      NAME=custom-job-delegate
+      IMAGE_REGISTRY_PATH=ejensen99999
