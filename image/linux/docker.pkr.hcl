@@ -15,8 +15,12 @@ locals {
 packer {
     required_plugins {
         docker = {
-            version = ">= 1.0.5"
-            source = "github.com/hashicorp/docker"
+            source  = "github.com/hashicorp/docker"
+            version = "~> 1"
+        }
+        ansible = {
+            source  = "github.com/hashicorp/ansible"
+            version = "~> 1"
         }
     }
 }
