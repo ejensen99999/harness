@@ -27,11 +27,7 @@ steps:
       
       ls -al image/ansible
 
-- task: Ansible@0
-  inputs:
-    ansibleInterface: 'agentMachine'
-    inventoriesAgentMachine: 'noInventory'
-    playbookPathOnAgentMachine: ""
+
 
 - task: PackerTool@0
   displayName: "Packer Load"
