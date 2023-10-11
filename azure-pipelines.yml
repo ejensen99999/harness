@@ -26,7 +26,12 @@ steps:
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
     CleanTargetFolder: true
 
-- task: PublishBuildArtifacts@1
+- task: PackerTool@0
   inputs:
-    TargetPath: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: PackerConfig
+    version: 
+
+- task: Packer@1
+  inputs:
+    templatePath: '$(Build.ArtifactStagingDirectory)/image/linux/docker.pkr.hcl'
+    command: 'init'
+
