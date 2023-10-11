@@ -27,10 +27,7 @@ steps:
       
       ls -al image/ansible
 
-- task: Bash@3
-  displayName: "Install Dependencies"
-  inputs:
-    filePath: 'image/linux/support/dependencies.sh'
+
 
 - task: PackerTool@0
   displayName: "Packer Load"
