@@ -17,6 +17,7 @@ pool:
 steps:
 
 - task: Bash@3
+  displayName: "tests"
   inputs:
     targetType: 'inline'
     script: |
@@ -27,6 +28,7 @@ steps:
       ls -al image/ansible
 
 - task: Bash@3
+  displayName: "Install Dependencies"
   inputs:
     filePath: 'image/linux/support/dependencies.sh'
 
