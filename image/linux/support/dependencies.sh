@@ -3,8 +3,8 @@
 curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
 apt-add-repository --yes "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
 add-apt-repository --yes --update ppa:ansible/ansible
-apt-get update
-apt-get install -y \
+apt update
+apt install -y \
     ansible \
     ca-certificates \
     curl \

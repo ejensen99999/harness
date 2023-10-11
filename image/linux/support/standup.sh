@@ -16,7 +16,7 @@ apt update && apt upgrade -y \
 
 REPO_ARGS1="$(curl https://packages.microsoft.com/config/ubuntu/20.04/mssql-server-2019.list)"
 REPO_ARGS2="$(curl https://packages.microsoft.com/config/ubuntu/20.04/prod.list)"
-NODE_MAJOR=16
+NODE_MAJOR=20
 
 wget -q https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb \
     && dpkg -i packages-microsoft-prod.deb \
@@ -46,8 +46,9 @@ add-apt-repository -y "${REPO_ARGS1}"
 add-apt-repository -y "${REPO_ARGS2}"
 add-apt-repository -y https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/
 apt-add-repository -y "deb https://apt.kubernetes.io/ kubernetes-xenial main"
+apt-add-repository --yes "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
 
-curl -fsSL https://deb.nodesource.com/setup_lts.x | bash -
+#curl -fsSL https://deb.nodesource.com/setup_lts.x | bash -
 
 apt update && apt upgrade -y \
 && apt install --no-install-recommends --allow-unauthenticated -y \
