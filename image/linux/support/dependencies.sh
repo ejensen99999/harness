@@ -16,7 +16,8 @@ apt install -y \
 # echo "Where is ansible-playbook?"
 # which ansible-playbook
 user=$(whoami)
-
+mkdir /home/$user/.ansible
+chmod 777 -R /home/$user/.ansible
 #sudo chmod 777 -R /home/$user/.ansible
 
 # echo "What version is it?"
