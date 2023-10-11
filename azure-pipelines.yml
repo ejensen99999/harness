@@ -27,10 +27,19 @@ steps:
       
       ls -al image/ansible
 
-- task: Bash@3
-  displayName: "Install Dependencies"
+- task: UsePythonVersion@0
+  displayName: "Install Python"
   inputs:
-    filePath: 'image/linux/support/dependencies.sh'
+    versionSpec: '3.8'
+    addToPath: true
+    architecture: 'x64'
+
+- task: Bash@3
+  displayName: "Install Ansible"
+  inputs:
+    targetType: 'inline'
+    script: |
+      python3 -m pip install --user ansible
 
 - task: PackerTool@0
   displayName: "Packer Load"
