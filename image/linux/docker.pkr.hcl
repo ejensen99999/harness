@@ -62,7 +62,7 @@ build {
         playbook_file = "${local.provisioning}/configure_linux.yml"
         groups = ["linux"]
         extra_arguments = ["--extra-vars",
-            "ansible_connection=${var.ansible_connection}",
+            "ansible_connection=${var.ansible_connection}", "-vvv"
             "-e",
             "config=${var.CONFIG}",
             "-e",
