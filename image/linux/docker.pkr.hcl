@@ -1,6 +1,7 @@
 variable "CONFIG" { type = string }
 variable "EMAIL" { type = string }
 variable "NAME" {  type = string }
+variable "SOURCE_DIR" {type = string},
 variable "LABELS" { default = ["harness", "ubuntu20.04", "linux"]}
 variable "IMAGE_REGISTRY_PATH" { type = string }
 
@@ -9,7 +10,7 @@ variable "ansible_connection" { default = "docker" }
 locals {
   provisioning  = "${path.root}/../ansible"
   support_folder = "${path.root}/support"
-  scripts = "${path.root}/configs"
+  scripts = "${var.SOURCE_DIR}/configs"
   TEMPLATE_DIR   = path.root
 }
 
@@ -75,7 +76,7 @@ build {
             "-e",
             "image_registry_path=${var.IMAGE_REGISTRY_PATH}",
             "-e",
-            "source_dir=${local.scripts}"
+            "source_dir=${var.SOURCE_DIR}"
         ]
     }
 

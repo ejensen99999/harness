@@ -2,7 +2,7 @@
 
 - name: Add Configuration
   ansible.builtin.include_vars:
-    file: "{{ config }}"
+    file: "../{{ source_dir }}/{{ config }}"
 
 - ansible.builtin.set_fact:
     cs_includes: "{{ hostvars.default.installers.includes }}"
