@@ -1,6 +1,8 @@
 ---
 - name: "Provision Linux Image"
   hosts: default
+  vars:
+    ansible_remote_tmp: /tmp
   #become: true
 
   roles:
