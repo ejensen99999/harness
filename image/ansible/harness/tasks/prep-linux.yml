@@ -2,12 +2,12 @@
 - name: Load Linux Variables
   ansible.builtin.include_vars: linux.json
 
-- name: Create Kubernetes template
-  local_action:
-    module: ansible.builtin.template
-    src: ../agent/runner_deploy.yml.j2
-    dest: ../agent/{{ kube_name }}.yml
-  run_once: True
+# - name: Create Kubernetes template
+#   local_action:
+#     module: ansible.builtin.template
+#     src: ../agent/runner_deploy.yml.j2
+#     dest: ../agent/{{ kube_name }}.yml
+#   run_once: True
 
 - name: Install Docker
   ansible.builtin.script:
