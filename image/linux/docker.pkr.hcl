@@ -61,6 +61,7 @@ build {
     provisioner "ansible" {
         playbook_file = "${local.provisioning}/configure_linux.yml"
         groups = ["linux"]
+        use_proxy = false
         extra_arguments = ["--extra-vars",
             "ansible_connection=${var.ansible_connection}", "-vvv",
             "-e",
