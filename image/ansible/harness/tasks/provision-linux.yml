@@ -2,7 +2,7 @@
 - block:
     - name: Execute Pre-run Scripts
       ansible.builtin.script:
-        cmd: "../{{ source_dir }}/{{item}}"
+        cmd: "{{ source_dir }}/{{item}}"
       loop: "{{ cs_prescripts }}"
       register: prescript_output
 
@@ -61,7 +61,7 @@
 - block:
     - name: Execute Post-Run Scripts
       ansible.builtin.script:
-        cmd: "../{{ source_dir }}/{{item}}"
+        cmd: "{{ source_dir }}/{{item}}"
       loop: "{{ cs_postscripts }}"
       register: postscript_outputs
 
