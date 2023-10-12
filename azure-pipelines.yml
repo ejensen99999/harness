@@ -53,3 +53,5 @@ steps:
       EMAIL=ejensen99999@comcast.net
       NAME=custom-job-delegate
       IMAGE_REGISTRY_PATH=ejensen99999
+      LOGIN_USER=ejensen99999
+
