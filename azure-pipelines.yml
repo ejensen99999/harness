@@ -48,6 +48,7 @@ steps:
     templatePath: 'image/linux/docker.pkr.hcl'
     command: 'build'
     variables: |
+      SOURCE_DIR=./
       CONFIG=configs/custom-job-delegate.hd.json
       EMAIL=ejensen99999@comcast.net
       NAME=custom-job-delegate
