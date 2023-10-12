@@ -31,4 +31,11 @@ stages:
         tags: |
           $(tag)
     
+    - task: Bash@3
+      inputs:
+        targetType: 'inline'
+        script: |
+          # Write your commands here
+          
+          echo $(DockerOutput)
     
