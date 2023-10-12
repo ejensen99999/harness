@@ -37,5 +37,7 @@ stages:
         targetType: 'inline'
         script: |
           readarray -t lines < <(echo $(dockerBuild.DockerOutput))
-          echo $lines[0]
+          file=${lines[0]}
+          echo $file
+          cat $file
     
