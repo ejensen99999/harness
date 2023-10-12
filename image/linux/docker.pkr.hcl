@@ -64,7 +64,7 @@ build {
         groups = ["linux"]
         use_proxy = false
         extra_arguments = ["--extra-vars",
-            "ansible_connection=${var.ansible_connection}", "-vvv",
+            "-vvv",
             "-e",
             "config=${var.CONFIG}",
             "-e",
