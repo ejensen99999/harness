@@ -11,6 +11,9 @@ trigger:
     include:
       - image/*
 
+variables:
+  - group: dockerHub
+
 pool:
   name: linux 
 
@@ -53,5 +56,5 @@ steps:
       EMAIL=ejensen99999@comcast.net
       NAME=custom-job-delegate
       IMAGE_REGISTRY_PATH=ejensen99999
-      LOGIN_USER=ejensen99999
-
+      LOGIN_USER=$(LOGIN_USER)
+      LOGIN_PASS=$(LOGIN_PASS)
