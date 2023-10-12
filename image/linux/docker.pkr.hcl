@@ -4,6 +4,8 @@ variable "NAME" {  type = string }
 variable "SOURCE_DIR" { type = string }
 variable "LABELS" { default = ["harness", "ubuntu20.04", "linux"]}
 variable "IMAGE_REGISTRY_PATH" { type = string }
+variable "LOGIN_USER" { type = string }
+variable "LOGIN_PASS" { sensitive = true }
 
 variable "ansible_connection" { default = "docker" }
 
@@ -82,6 +84,12 @@ build {
         post-processor "docker-tag" {
             repository = "${var.IMAGE_REGISTRY_PATH}"
             tags = ["harness-delegate", "linux", "ubuntu20.04"]
+        }
+
+        post-processor "docker-push" {
+            login = true
+            login_username = var.LOGIN_USER
+            login_password = var.LOGIN_PASS
         }
     }
 }
