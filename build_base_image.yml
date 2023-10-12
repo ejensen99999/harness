@@ -36,6 +36,6 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          docker rmi $(docker images -q -f ejensen99999/delegate-base)
+          docker rmi -f $(docker images -q ejensen99999/delegate-base)
           
     
