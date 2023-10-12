@@ -6,6 +6,7 @@
     "prescripts": [],
     "apt": [
       "ansible",
+      "azure-cli",
       "nodejs",
       "git-all"
     ],
