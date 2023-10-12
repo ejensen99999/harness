@@ -39,5 +39,6 @@ stages:
           readarray -t lines < <(echo "$(dockerBuild.DockerOutput)")
           file=${lines[0]}
           echo $file
-          cat $file
+          cat "$file"
+          echo "read the file"
     
