@@ -23,6 +23,7 @@ stages:
     steps:
     - task: Docker@2
       displayName: Build an image
+      name: dockerBuild
       inputs:
         containerRegistry: 'dockerhub'
         repository: 'ejensen99999/delegate-base'
@@ -37,5 +38,5 @@ stages:
         script: |
           # Write your commands here
           
-          echo $(DockerOutput)
+          echo $(dockerBuild.DockerOutput)
     
