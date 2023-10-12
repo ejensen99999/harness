@@ -36,18 +36,6 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          output=$(dockerBuild.DockerOutput)
-          echo "----1"
-          echo $output
-          echo "----2"
-          readarray -t lines < <(echo "$(dockerBuild.DockerOutput)")
-          file=${lines[0]}
-          echo "----3"
-          echo $file
-          echo "----4"
-          content=$(<file)
-          echo "----5"
-          echo $content
-          echo "----6"
+          docker rmi $(docker images -q -f ejensen99999/delegate-base)
           
     
