@@ -27,7 +27,10 @@ steps:
       location=$(pwd)
       echo "##vso[task.setvariable variable=pwd; isoutput=true;]$location"
 
-
+- task: Bash@3
+  inputs:
+   targetType: 'inline'
+   script:  echo "$(setLocation.pwd)"
 
 - task: PackerTool@0
   displayName: "Packer Load"
