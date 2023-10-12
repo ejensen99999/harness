@@ -10,6 +10,7 @@ resources:
 
 variables:
   tag: '$(Build.BuildId)'
+  repo: 'ejensen99999/delegate-base'
 
 stages:
 - stage: Build
@@ -26,7 +27,7 @@ stages:
       name: dockerBuild
       inputs:
         containerRegistry: 'dockerhub'
-        repository: 'ejensen99999/delegate-base'
+        repository: $(repo)
         command: 'buildAndPush'
         Dockerfile: '$(Build.SourcesDirectory)/base_delegate/Dockerfile'
         tags: |
@@ -36,6 +37,6 @@ stages:
       inputs:
         targetType: 'inline'
         script: |
-          docker rmi -f $(docker images -q ejensen99999/delegate-base)
+          docker rmi -f $(docker images -q $(repo))
           
     
