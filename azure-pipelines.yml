@@ -17,15 +17,15 @@ pool:
 steps:
 
 - task: Bash@3
-  displayName: "tests"
+  displayName: "Set Location"
+  name: setLocation
   inputs:
     targetType: 'inline'
     script: |
       # Write your commands here
       
-      pwd
-      
-      ls -al image/ansible
+      location=$(pwd)
+      echo "##vso[task.setvariable variable=pwd; isoutput=true;]$location"
 
 
 
@@ -48,7 +48,7 @@ steps:
     templatePath: 'image/linux/docker.pkr.hcl'
     command: 'build'
     variables: |
-      SOURCE_DIR=./
+      SOURCE_DIR=$(setLocation.pwd)
       CONFIG=configs/custom-job-delegate.hd.json
       EMAIL=ejensen99999@comcast.net
       NAME=custom-job-delegate
