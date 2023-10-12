@@ -2,7 +2,7 @@ variable "CONFIG" { type = string }
 variable "EMAIL" { type = string }
 variable "NAME" {  type = string }
 variable "SOURCE_DIR" { type = string }
-variable "LABELS" { default = ["harness", "ubuntu20.04", "linux"]}
+variable "TAG" { default = "harness"}
 variable "IMAGE_REGISTRY_PATH" { type = string }
 variable "LOGIN_USER" { type = string }
 variable "LOGIN_PASS" { sensitive = true }
@@ -82,8 +82,8 @@ build {
 
     post-processors {
         post-processor "docker-tag" {
-            repository = "${var.IMAGE_REGISTRY_PATH}"
-            tags = ["harness-delegate", "linux", "ubuntu20.04"]
+            repository = "${var.IMAGE_REGISTRY_PATH}/${var.NAME}"
+            tags = [var.TAG]
         }
 
         post-processor "docker-push" {
