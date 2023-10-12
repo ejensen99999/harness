@@ -1,7 +1,7 @@
 variable "CONFIG" { type = string }
 variable "EMAIL" { type = string }
 variable "NAME" {  type = string }
-variable "SOURCE_DIR" {type = string},
+variable "SOURCE_DIR" { type = string }
 variable "LABELS" { default = ["harness", "ubuntu20.04", "linux"]}
 variable "IMAGE_REGISTRY_PATH" { type = string }
 
