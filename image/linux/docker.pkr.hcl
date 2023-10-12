@@ -63,9 +63,7 @@ build {
         playbook_file = "${local.provisioning}/configure_linux.yml"
         groups = ["linux"]
         use_proxy = false
-        extra_arguments = ["--extra-vars",
-            "-vvv",
-            "-e",
+        extra_arguments = ["-e",
             "config=${var.CONFIG}",
             "-e",
             "kube_name=${var.NAME}",
