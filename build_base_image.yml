@@ -38,7 +38,12 @@ stages:
         script: |
           readarray -t lines < <(echo "$(dockerBuild.DockerOutput)")
           file=${lines[0]}
+          echo "-----"
           echo $file
+          echo "-----"
           content=$(<file)
+          echo "-----"
           echo $content
+          echo "-----"
+          
     
