@@ -30,6 +30,7 @@ stages:
         repository: $(repo)
         command: 'buildAndPush'
         Dockerfile: '$(Build.SourcesDirectory)/delegates/Dockerfile-Ubuntu'
+        arguments: '--build-arg TARGETARCH=amd64 --build-arg DELEGATEVERSION=80505'
         tags: |
           $(tag)
     
