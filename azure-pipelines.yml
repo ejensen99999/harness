@@ -12,12 +12,25 @@ trigger:
       - image/*
 
 variables:
-  - group: dockerHub
+  group: dockerHub
+  tag: 'base'
+  repo: 'ejensen99999/delegate-base'
 
 pool:
   name: linux 
 
 steps:
+
+- task: Docker@2
+  displayName: Build an image
+  name: dockerBuild
+  inputs:
+    containerRegistry: 'dockerhub'
+    repository: $(repo)
+    command: 'buildAndPush'
+    Dockerfile: '$(Build.SourcesDirectory)/delegates/Dockerfile_Ubuntu'
+    tags: |
+      $(tag)
 
 - task: PackerTool@0
   displayName: "Packer Load"
@@ -38,6 +51,7 @@ steps:
     templatePath: 'image/linux/docker.pkr.hcl'
     command: 'build'
     variables: |
+      SOURCE_IMAGE="$(repo):$(tag)"
       SOURCE_DIR=$(Build.Repository.LocalPath)
       CONFIG=configs/custom-job-delegate.hd.json
       EMAIL=ejensen99999@comcast.net
