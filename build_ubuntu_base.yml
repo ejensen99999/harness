@@ -9,7 +9,7 @@ resources:
 - repo: self
 
 variables:
-  tag: '$(Build.BuildId)'
+  tag: 'latest'
   repo: 'ejensen99999/minimal_ubuntu_base'
 
 stages:
