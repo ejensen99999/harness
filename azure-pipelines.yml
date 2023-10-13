@@ -15,6 +15,7 @@ variables:
   group: dockerHub
   tag: 'latest'
   repo: 'ejensen99999/delegate_base'
+  temp: 'ubuntu_base_image'
 
 pool:
   name: linux 
@@ -25,7 +26,7 @@ steps:
   displayName: Build an image
   name: dockerBuild
   inputs:
-    repository: $(repo)
+    repository: $(temp)
     command: 'build'
     Dockerfile: '$(Build.Repository.LocalPath)/delegates/Dockerfile-Ubuntu'
     tags: |
@@ -50,7 +51,7 @@ steps:
     templatePath: 'image/linux/docker.pkr.hcl'
     command: 'build'
     variables: |
-      SOURCE_IMAGE="$(repo):$(tag)"
+      SOURCE_IMAGE="$(temp):$(tag)"
       SOURCE_DIR=$(Build.Repository.LocalPath)
       CONFIG=configs/custom-job-delegate.hd.json
       EMAIL=ejensen99999@comcast.net
