@@ -12,10 +12,13 @@ trigger:
       - image/*
 
 variables:
-  group: dockerHub
-  tag: 'latest'
-  repo: 'ejensen99999/delegate_base'
-  temp: 'ubuntu_base_image'
+  - group: dockerHub
+  - name: 'tag'
+    value: 'latest'
+  - name: 'repo'
+    value: 'ejensen99999/delegate_base'
+  - name: 'temp'
+    value: 'ubuntu_base_image'
 
 pool:
   name: linux 
