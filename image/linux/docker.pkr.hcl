@@ -1,7 +1,6 @@
 variable "CONFIG" { type = string }
 variable "EMAIL" { type = string }
 variable "NAME" {  type = string }
-variable "SOURCE_IMAGE" { type = string }
 variable "SOURCE_DIR" { type = string }
 variable "TAG" { default = "harness"}
 variable "IMAGE_REGISTRY_PATH" { type = string }
@@ -31,7 +30,7 @@ packer {
 }
 
 source "docker" "delegate-linux" {
-    image = "ubuntu_base_image:latest" //"${var.SOURCE_IMAGE}"
+    image = "ejensen99999/minimal_ubuntu_base:latest"
     commit = true
     // changes = [
     //     "ENV TARGETARCH amd64"
