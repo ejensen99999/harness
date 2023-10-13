@@ -42,6 +42,9 @@ ARG TARGETARCH
 ARG BASEURL=https://app.harness.io/public/shared/delegates
 ARG DELEGATEVERSION
 
+RUN chmod -R 775 /opt/harness-delegate \
+  && chgrp -R 0 /opt/harness-delegate  \
+  && chown -R 1001 /opt/harness-delegate
 
 RUN curl -s -L -o delegate.jar $BASEURL/$DELEGATEVERSION/delegate.jar
 
