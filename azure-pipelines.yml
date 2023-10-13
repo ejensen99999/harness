@@ -22,17 +22,6 @@ pool:
 
 steps:
 
-- task: Docker@2
-  displayName: Build an image
-  name: dockerBuild
-  inputs:
-    repository: $(temp)
-    command: 'build'
-    Dockerfile: '$(Build.Repository.LocalPath)/delegates/Dockerfile-Ubuntu'
-    arguments: '--build-arg TARGETARCH=amd64 --build-arg DELEGATEVERSION=80505'
-    tags: |
-      $(tag)
-
 - task: PackerTool@0
   displayName: "Packer Load"
   inputs:
@@ -52,7 +41,6 @@ steps:
     templatePath: 'image/linux/docker.pkr.hcl'
     command: 'build'
     variables: |
-      SOURCE_IMAGE="$(temp):$(tag)"
       SOURCE_DIR=$(Build.Repository.LocalPath)
       CONFIG=configs/custom-job-delegate.hd.json
       EMAIL=ejensen99999@comcast.net
