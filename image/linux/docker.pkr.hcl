@@ -35,7 +35,8 @@ source "docker" "delegate-linux" {
     run_command = ["-d", "-i", "-t", "--entrypoint=/bin/bash", "--", "{{.Image}}"]
     changes = [
         "ENV TARGETARCH amd64",
-        "USER 1001"
+        "USER 1001",
+        "CMD [\"./start.sh\"]"
     ]
 }
 
@@ -92,10 +93,10 @@ build {
             tags = [var.TAG]
         }
 
-        // post-processor "docker-push" {
-        //     login = true
-        //     login_username = var.LOGIN_USER
-        //     login_password = var.LOGIN_PASS
-        // }
+        post-processor "docker-push" {
+            login = true
+            login_username = var.LOGIN_USER
+            login_password = var.LOGIN_PASS
+        }
     }
 }
