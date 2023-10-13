@@ -26,17 +26,22 @@ stages:
       displayName: Build an image
       name: dockerBuild
       inputs:
-        containerRegistry: 'dockerhub'
         repository: $(repo)
-        command: 'buildAndPush'
+        command: 'build'
         Dockerfile: '$(Build.SourcesDirectory)/delegates/Dockerfile-Ubuntu'
         arguments: '--build-arg TARGETARCH=amd64 --build-arg DELEGATEVERSION=80505'
         tags: |
           $(tag)
     
-    - task: Bash@3
+    - task: Docker@2
       inputs:
-        targetType: 'inline'
-        script: |
-          docker rmi -f $(docker images -q $(repo))
+        containerRegistry: 'dockerhub'
+        repository: '$(repo)'
+        command: 'push'
+
+    # - task: Bash@3
+    #   inputs:
+    #     targetType: 'inline'
+    #     script: |
+    #       docker rmi -f $(docker images -q $(repo))
           
