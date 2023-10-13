@@ -19,19 +19,6 @@ pool:
 
 steps:
 
-- task: Bash@3
-  displayName: "Set Location"
-  inputs:
-    targetType: 'inline'
-    script: |
-      location=$(pwd)
-      echo "##vso[task.setvariable variable=pwd;]$location"
-
-- task: Bash@3
-  inputs:
-   targetType: 'inline'
-   script:  echo "$(pwd)"
-
 - task: PackerTool@0
   displayName: "Packer Load"
   inputs:
@@ -51,7 +38,7 @@ steps:
     templatePath: 'image/linux/docker.pkr.hcl'
     command: 'build'
     variables: |
-      SOURCE_DIR=$(pwd)
+      SOURCE_DIR=$(Build.Repository.LocalPath)
       CONFIG=configs/custom-job-delegate.hd.json
       EMAIL=ejensen99999@comcast.net
       NAME=custom-job-delegate
