@@ -28,7 +28,7 @@ steps:
     containerRegistry: 'dockerhub'
     repository: $(repo)
     command: 'buildAndPush'
-    Dockerfile: '$(Build.SourcesDirectory)/delegates/Dockerfile_Ubuntu'
+    Dockerfile: '$(Build.Repository.LocalPath)/delegates/Dockerfile_Ubuntu'
     tags: |
       $(tag)
 
