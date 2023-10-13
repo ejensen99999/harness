@@ -35,7 +35,7 @@ source "docker" "delegate-linux" {
     changes = [
         "WORKDIR /opt/harness-delegate",
         "ENV TARGETARCH amd64",
-        "CMD [\"/bin/bash\", \"-c\", \"./entrypoint.sh && bash -c '     while [[ ! -e watcher.log ]]; do sleep 1s; done; tail -F watcher.log &     while [[ ! -e delegate.log ]]; do sleep 1s; done; tail -F delegate.log'\"]"
+        "CMD [\"./start.sh\"]"
     ]
 }
 
