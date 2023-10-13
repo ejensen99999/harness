@@ -19,3 +19,7 @@ steps:
       echo $location
       echo $(Agent.BuildDirectory)
       echo $(Agent.HomeDirectory)
+      echo $(Agent.WorkFolder)
+      echo $(Build.ArtifactStagingDirectory)
+      echo $(Build.Repository.LocalPath)
+
