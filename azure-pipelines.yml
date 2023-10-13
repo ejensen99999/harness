@@ -25,9 +25,8 @@ steps:
   displayName: Build an image
   name: dockerBuild
   inputs:
-    containerRegistry: 'dockerhub'
     repository: $(repo)
-    command: 'buildAndPush'
+    command: 'build'
     Dockerfile: '$(Build.Repository.LocalPath)/delegates/Dockerfile-Ubuntu'
     tags: |
       $(tag)
