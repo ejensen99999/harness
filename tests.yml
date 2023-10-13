@@ -11,10 +11,11 @@ pool:
 
 steps:
 - task: Bash@3
-  displayName: "Set Location"
+  displayName: "locations"
   inputs:
     targetType: 'inline'
     script: |
       location=$(pwd)
       echo $location
       echo $(Agent.BuildDirectory)
+      echo $(Agent.HomeDirectory)
