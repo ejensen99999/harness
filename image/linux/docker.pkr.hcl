@@ -71,6 +71,8 @@ build {
         groups = ["linux"]
         use_proxy = false
         extra_arguments = ["-e",
+            "-vvv",
+            "-e",
             "config=${var.CONFIG}",
             "-e",
             "kube_name=${var.NAME}",
