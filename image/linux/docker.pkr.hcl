@@ -31,7 +31,7 @@ packer {
 }
 
 source "docker" "delegate-linux" {
-    image = var.SOURCE_IMAGE
+    image = "${var.SOURCE_IMAGE}"
     commit = true
     // changes = [
     //     "ENV TARGETARCH amd64"
