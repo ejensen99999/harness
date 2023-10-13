@@ -35,7 +35,7 @@ source "docker" "delegate-linux" {
     changes = [
         "WORKDIR /opt/harness-delegate",
         "ENV TARGETARCH amd64",
-        "CMD [\"/bin/bash\", \"\c\", \"./start.sh\"]"
+        "CMD [\"/bin/bash\", \"-c\", \"./start.sh\"]"
     ]
 }
 
