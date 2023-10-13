@@ -43,7 +43,6 @@ add-apt-repository -y ppa:apt-fast/stable
 add-apt-repository -y ppa:git-core/ppa
 add-apt-repository -y "${REPO_ARGS1}"
 add-apt-repository -y "${REPO_ARGS2}"
-add-apt-repository -y https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/
 apt-add-repository -y "deb https://apt.kubernetes.io/ kubernetes-xenial main"
 
 #curl -fsSL https://deb.nodesource.com/setup_lts.x | bash -
