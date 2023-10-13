@@ -1,6 +1,7 @@
 variable "CONFIG" { type = string }
 variable "EMAIL" { type = string }
 variable "NAME" {  type = string }
+variable "SOURCE_IMAGE" { type = string }
 variable "SOURCE_DIR" { type = string }
 variable "TAG" { default = "harness"}
 variable "IMAGE_REGISTRY_PATH" { type = string }
@@ -30,13 +31,11 @@ packer {
 }
 
 source "docker" "delegate-linux" {
-    image = "harness/delegate:latest"
+    image = var.SOURCE_IMAGE
     commit = true
-    changes = [
-        "WORKDIR /opt/harness-delegate",
-        "ENV TARGETARCH amd64",
-        "CMD [\"/bin/bash\", \"-c\", \"./start.sh\"]"
-    ]
+    // changes = [
+    //     "ENV TARGETARCH amd64"
+    // ]
 }
 
 build { 
