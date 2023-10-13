@@ -32,6 +32,7 @@ packer {
 source "docker" "delegate-linux" {
     image = "ejensen99999/minimal_ubuntu_base:latest"
     commit = true
+    run_command = ["-d", "-i", "-t", "--entrypoint=/bin/bash", "--", "{{.Image}}"]
     // changes = [
     //     "ENV TARGETARCH amd64"
     // ]

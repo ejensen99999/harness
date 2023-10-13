@@ -10,6 +10,6 @@ docker run --cpus=1 --memory=2g \
   -e DELEGATE_TOKEN=MzNlZGVhYzAzNmI0YzkyMTFmMmY1OTA5OTZiOGUwNTY= \
   -e LOG_STREAMING_SERVICE_URL=https://app.harness.io/log-service/ \
   -e MANAGER_HOST_AND_PORT=https://app.harness.io \
-  ubuntu_base_image:latest
+  ejensen99999/minimal_ubuntu_base:latest
 
   echo "there"
