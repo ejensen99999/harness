@@ -13,7 +13,7 @@ trigger:
 
 variables:
   group: dockerHub
-  tag: 'ubuntu2004'
+  tag: 'latest'
   repo: 'ejensen99999/delegate_base'
 
 pool:
