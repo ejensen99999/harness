@@ -29,6 +29,7 @@ steps:
     repository: $(temp)
     command: 'build'
     Dockerfile: '$(Build.Repository.LocalPath)/delegates/Dockerfile-Ubuntu'
+    arguments: '--build-arg TARGETARCH=amd64 --build-arg DELEGATEVERSION=80505'
     tags: |
       $(tag)
 
