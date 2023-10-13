@@ -13,8 +13,8 @@ trigger:
 
 variables:
   group: dockerHub
-  tag: 'ubuntu20.04'
-  repo: 'ejensen99999/delegate-base'
+  tag: 'ubuntu2004'
+  repo: 'ejensen99999/delegate_base'
 
 pool:
   name: linux 
