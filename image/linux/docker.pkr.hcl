@@ -32,6 +32,11 @@ packer {
 source "docker" "delegate-linux" {
     image = "harness/delegate:latest"
     commit = true
+    changes = [
+        "WORKDIR /opt/harness-delegate",
+        "ENV TARGETARCH amd64",
+        "CMD [\"/bin/sh\", \"-c\", \"./entrypoint.sh && bash -c '     while [[ ! -e watcher.log ]]; do sleep 1s; done; tail -F watcher.log &     while [[ ! -e delegate.log ]]; do sleep 1s; done; tail -F delegate.log'\"]"
+    ]
 }
 
 build { 
