@@ -70,8 +70,7 @@ build {
         playbook_file = "${local.provisioning}/configure_linux.yml"
         groups = ["linux"]
         use_proxy = false
-        extra_arguments = ["-e",
-            "-vvv",
+        extra_arguments = ["-vvv",
             "-e",
             "config=${var.CONFIG}",
             "-e",
