@@ -91,10 +91,10 @@ build {
             tags = [var.TAG]
         }
 
-        post-processor "docker-push" {
-            login = true
-            login_username = var.LOGIN_USER
-            login_password = var.LOGIN_PASS
-        }
+        // post-processor "docker-push" {
+        //     login = true
+        //     login_username = var.LOGIN_USER
+        //     login_password = var.LOGIN_PASS
+        // }
     }
 }
