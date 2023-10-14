@@ -12,6 +12,16 @@
       "pywinrm"
     ],
     "postscripts": [
+      "configs/scripts/add_chartmuseum.sh",
+      "configs/scripts/add_go_template.sh",
+      "configs/scripts/add_helm.sh",
+      "configs/scripts/add_kubectl.sh",
+      "configs/scripts/add_kustomize.sh",
+      "configs/scripts/add_oc.sh",
+      "configs/scripts/add_pywinrm.sh",
+      "configs/scripts/add_scm.sh",
+      "configs/scripts/add_terraform.sh",
+      "configs/scripts/set_harness_dir_perms.sh"
     ]
   }
 }
