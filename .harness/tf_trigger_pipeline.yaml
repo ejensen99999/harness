@@ -83,6 +83,8 @@ pipeline:
                                 useConnectorCredentials: true
                             secretManagerRef: account.harnessSecretManager
                             skipRefreshCommand: false
+                          delegateSelectors:
+                            - <+execution.steps.select_delegate.output.outputVariables.HOST_SELECTOR>
                         timeout: 10m
                         failureStrategies:
                           - onFailure:
@@ -98,6 +100,8 @@ pipeline:
                           provisionerIdentifier: output
                           configuration:
                             type: InheritFromPlan
+                          delegateSelectors:
+                            - <+execution.steps.select_delegate.output.outputVariables.HOST_SELECTOR>
                         timeout: 10m
                   strategy:
                     repeat:
