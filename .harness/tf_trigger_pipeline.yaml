@@ -110,3 +110,5 @@ pipeline:
       description: ""
       required: false
       value: <+input>
+  delegateSelectors:
+    - custom-delegate
