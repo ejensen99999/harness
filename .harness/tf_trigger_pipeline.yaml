@@ -106,7 +106,7 @@ pipeline:
                   strategy:
                     repeat:
                       items:
-                        - <+execution.steps.ShellScript_1.output.outputVariables.folders.split(',')>
+                        - <+execution.steps.select_delegate.output.outputVariables.folders.split(',')>
         tags: {}
         failureStrategies:
           - onFailure:
