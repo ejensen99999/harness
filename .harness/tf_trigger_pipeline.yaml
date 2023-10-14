@@ -81,6 +81,12 @@ pipeline:
                             secretManagerRef: org.harnessSecretManager
                             skipRefreshCommand: false
                         timeout: 10m
+                        failureStrategies:
+                          - onFailure:
+                              errors:
+                                - AllErrors
+                              action:
+                                type: Abort
                     - step:
                         type: TerraformApply
                         name: TerraformApply_2
