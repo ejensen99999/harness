@@ -109,8 +109,7 @@ pipeline:
   properties:
     ci:
       codebase:
-        connectorRef: account.Admin_Github
-        repoName: harness
+        connectorRef: account.Github
         build: <+input>
   variables:
     - name: PAYLOAD
