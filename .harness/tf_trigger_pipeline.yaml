@@ -25,7 +25,6 @@ pipeline:
                       spec:
                         script: |-
                           #!/usr/bin/env bash 
-                          HOST_SELECTOR=$HOSTNAME
                           json=$payload
 
                           readarray -t changes < <(echo $json | jq -c '.commits[] | [.added[], .removed[], .modified[]]' | jq -c '.[]')
@@ -46,6 +45,7 @@ pipeline:
                           result=${result:1}
 
                           export paths=$result
+                          export HOST_SELECTOR=$HOSTNAME
                     environmentVariables:
                       - name: payload
                         type: String
@@ -54,7 +54,7 @@ pipeline:
                       - name: folders
                         type: String
                         value: paths
-                      - name: HOST_SELECTOR
+                      - name: HOST
                         type: String
                         value: HOST_SELECTOR
                   timeout: 10m
@@ -84,7 +84,7 @@ pipeline:
                             secretManagerRef: account.harnessSecretManager
                             skipRefreshCommand: false
                           delegateSelectors:
-                            - <+execution.steps.select_delegate.output.outputVariables.HOST_SELECTOR>
+                            - <+execution.steps.select_delegate.output.outputVariables.HOST>
                         timeout: 10m
                         failureStrategies:
                           - onFailure:
@@ -101,7 +101,7 @@ pipeline:
                           configuration:
                             type: InheritFromPlan
                           delegateSelectors:
-                            - <+execution.steps.select_delegate.output.outputVariables.HOST_SELECTOR>
+                            - <+execution.steps.select_delegate.output.outputVariables.HOST>
                         timeout: 10m
                   strategy:
                     repeat:
