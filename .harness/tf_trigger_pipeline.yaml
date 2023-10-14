@@ -76,8 +76,7 @@ pipeline:
                                   branch: main
                                   folderPath: <+repeat.item>
                                 type: Github
-                            secretManagerRef: harnessSecretManager
-                            skipRefreshCommand: false
+                            secretManagerRef: org.harnessSecretManager
                         timeout: 10m
                     - step:
                         type: TerraformApply
