@@ -6,7 +6,8 @@
     "prescripts": [],
     "apt": [
       "ansible",
-      "git-all"
+      "git-all",
+      "terraform 1.5.5"
     ],
     "pip": [
       "pywinrm"
@@ -20,7 +21,6 @@
       "configs/scripts/add_oc.sh",
       "configs/scripts/add_pywinrm.sh",
       "configs/scripts/add_scm.sh",
-      "configs/scripts/add_terraform.sh",
       "configs/scripts/set_harness_dir_perms.sh"
     ]
   }

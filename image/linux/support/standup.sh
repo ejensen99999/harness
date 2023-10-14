@@ -22,6 +22,9 @@ wget -q https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-pr
     && dpkg -i packages-microsoft-prod.deb \
     && rm packages-microsoft-prod.deb
 
+curl -L https://apt.releases.hashicorp.com/gpg | 
+    gpg --dearmor > /etc/apt/trusted.gpg.d/hashicorp-archive-keyring.gpg
+
 curl -L https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public |
     gpg --dearmor > /etc/apt/trusted.gpg.d/adoptopenjdk.gpg
 
@@ -36,6 +39,10 @@ curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key |
 
 echo "deb [signed-by=/etc/apt/trusted.gpg.d/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" |
     tee /etc/apt/sources.list.d/nodesource.list
+
+echo "deb [signed-by=/etc/apt/trusted.gpg.d/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | 
+    tee /etc/apt/sources.list.d/hashicorp.list
+
 
 add-apt-repository -y ppa:deadsnakes/ppa
 add-apt-repository -y ppa:ansible/ansible
