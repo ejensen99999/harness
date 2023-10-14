@@ -25,7 +25,7 @@ pipeline:
                       spec:
                         script: |-
                           #!/usr/bin/env bash 
-
+                          HOST_SELECTOR=$HOSTNAME
                           json=$payload
 
                           readarray -t changes < <(echo $json | jq -c '.commits[] | [.added[], .removed[], .modified[]]' | jq -c '.[]')
@@ -54,6 +54,9 @@ pipeline:
                       - name: folders
                         type: String
                         value: paths
+                      - name: HOST_SELECTOR
+                        type: String
+                        value: HOST_SELECTOR
                   timeout: 10m
               - stepGroup:
                   name: terraform_stuff
