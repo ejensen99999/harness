@@ -15,8 +15,8 @@ pipeline:
             steps:
               - step:
                   type: ShellScript
-                  name: ShellScript_1
-                  identifier: ShellScript_1
+                  name: select_delegate
+                  identifier: select_delegate
                   spec:
                     shell: Bash
                     onDelegate: true
