@@ -77,7 +77,7 @@ pipeline:
                                   repoName: harness
                                   gitFetchType: Branch
                                   branch: main
-                                  folderPath: <+repeat.item>
+                                  folderPath: tf_files
                                 type: Github
                               moduleSource:
                                 useConnectorCredentials: true
