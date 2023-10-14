@@ -105,8 +105,7 @@ pipeline:
                         timeout: 10m
                   strategy:
                     repeat:
-                      items:
-                        - <+execution.steps.select_delegate.output.outputVariables.folders.split(',')>
+                      items: <+execution.steps.select_delegate.output.outputVariables.folders.split(',')>
         tags: {}
         failureStrategies:
           - onFailure:
