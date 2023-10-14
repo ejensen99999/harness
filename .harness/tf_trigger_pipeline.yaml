@@ -78,7 +78,7 @@ pipeline:
                                 type: Github
                               moduleSource:
                                 useConnectorCredentials: true
-                            secretManagerRef: org.harnessSecretManager
+                            secretManagerRef: account.harnessSecretManager
                             skipRefreshCommand: false
                         timeout: 10m
                         failureStrategies:
