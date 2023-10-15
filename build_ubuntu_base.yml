@@ -28,7 +28,7 @@ stages:
         command: 'build'
         containerRegistry: 'dockerhub'
         repository: $(repo)
-        Dockerfile: '$(Build.SourcesDirectory)/delegates/Dockerfile-Ubuntu'
+        Dockerfile: '$(Build.SourcesDirectory)/delegates/Dockerfile_Ubuntu'
         arguments: '--build-arg TARGETARCH=amd64 --build-arg DELEGATEVERSION=80505'
         tags: |
           $(tag)
