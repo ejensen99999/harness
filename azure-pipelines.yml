@@ -16,7 +16,9 @@ variables:
   - name: 'tag'
     value: 'latest'
   - name: 'repo'
-    value: 'ejensen99999/delegate_base'
+    value: 'ejensen99999'
+  - name: 'container'
+    value: 'custom-job-delegate'
   - name: 'temp'
     value: 'ubuntu_base_image'
 
@@ -45,9 +47,15 @@ steps:
     command: 'build'
     variables: |
       SOURCE_DIR=$(Build.Repository.LocalPath)
-      CONFIG=configs/custom-job-delegate.hd.json
+      CONFIG=configs/$(container).hd.json
       EMAIL=ejensen99999@comcast.net
-      NAME=custom-job-delegate
+      NAME=$(container)
       IMAGE_REGISTRY_PATH=ejensen99999
       LOGIN_USER=$(LOGIN_USER)
       LOGIN_PASS=$(LOGIN_PASS)
+    
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      docker rmi -f $(docker images -q $(repo)/$(container))
