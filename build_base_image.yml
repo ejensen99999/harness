@@ -29,7 +29,7 @@ stages:
         containerRegistry: 'dockerhub'
         repository: $(repo)
         command: 'buildAndPush'
-        Dockerfile: '$(Build.SourcesDirectory)/base_delegate/Dockerfile'
+        Dockerfile: '$(Build.SourcesDirectory)/delegates/Dockerfile_Base'
         tags: |
           $(tag)
     
