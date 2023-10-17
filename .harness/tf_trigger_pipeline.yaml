@@ -81,6 +81,10 @@ pipeline:
                                 type: Github
                               moduleSource:
                                 useConnectorCredentials: true
+                            environmentVariables:
+                              - name: stuff
+                                value: google
+                                type: String
                             secretManagerRef: account.harnessSecretManager
                             skipRefreshCommand: false
                           delegateSelectors:
