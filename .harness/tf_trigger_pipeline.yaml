@@ -116,7 +116,9 @@ pipeline:
     ci:
       codebase:
         connectorRef: account.Github
+        repoName: harness
         build: <+input>
+        prCloneStrategy: MergeCommit
   variables:
     - name: PAYLOAD
       type: String
