@@ -1,0 +1,45 @@
+pipeline:
+  name: test_stuff
+  identifier: test_stuff
+  projectIdentifier: test
+  orgIdentifier: default
+  tags: {}
+  stages:
+    - stage:
+        name: try
+        identifier: try
+        description: ""
+        type: Custom
+        spec:
+          execution:
+            steps:
+              - step:
+                  type: TerraformPlan
+                  name: TerraformPlan_1
+                  identifier: TerraformPlan_1
+                  spec:
+                    provisionerIdentifier: output
+                    configuration:
+                      command: Apply
+                      configFiles:
+                        store:
+                          spec:
+                            connectorRef: account.Github
+                            gitFetchType: Branch
+                            branch: main
+                            folderPath: tf_files
+                          type: Github
+                        moduleSource:
+                          useConnectorCredentials: true
+                      secretManagerRef: harnessSecretManager
+                  timeout: 10m
+              - step:
+                  type: TerraformApply
+                  name: TerraformApply_1
+                  identifier: TerraformApply_1
+                  spec:
+                    provisionerIdentifier: output
+                    configuration:
+                      type: InheritFromPlan
+                  timeout: 10m
+        tags: {}
