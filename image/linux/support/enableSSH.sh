@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-ssh="/home/harness/.ssh"
+ssh="~/.ssh"
 
 mkdir -p $ssh \
     && chown harness:harness $ssh \
