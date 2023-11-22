@@ -1,7 +1,7 @@
 FROM alpine:3.18.4
 
 RUN apk add ansible \
-    && apk add python3-pip \
+    && apk add py3-pip \
     && mkdir /ansible \
     && chmod 777 -R /ansible \
     && ssh-keygen -t ed25519
