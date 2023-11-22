@@ -1,6 +1,7 @@
 FROM alpine:3.18.4
 
 RUN apk add ansible \
+    && apk add --no-cache openssh \
     && apk add py3-pip \
     && mkdir /ansible \
     && chmod 777 -R /ansible \
