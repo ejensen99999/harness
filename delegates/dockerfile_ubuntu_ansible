@@ -1,0 +1,30 @@
+FROM ubuntu:22.04
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt update \
+    && apt install -y \
+        software-properties-common \
+    && add-apt-repository --yes--update pps:ansible/ansible \
+    && apt install -y \
+        ansible \
+        ca-certificates \
+        curl \
+        gcc \
+        krb5-user \
+        libkrb5-dev \
+        python3-pip \
+        tree \
+        wget \
+    && pip3 install --upgrade pip \
+    && pip3 install pywinrm[kerberos] \
+    && pip3 install pywinrm \
+    && pip3 install requests-credssp \
+    && apt autoremove -y \
+    && mkdir /ansible \
+    && chmod 777 -R /ansible
+
+WORKDIR /ansible
+CMD ["/bin/bash"]
+
+
