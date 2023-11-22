@@ -4,8 +4,7 @@ RUN apk add ansible \
     && apk add --no-cache openssh \
     && apk add py3-pip \
     && mkdir /ansible \
-    && chmod 777 -R /ansible \
-    && ssh-keygen -t ed25519
+    && chmod 777 -R /ansible
 
 WORKDIR /ansible
 CMD ["/bin/sh"]
