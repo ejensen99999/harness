@@ -26,10 +26,8 @@ jobs:
       # Runs a single command using the runners shell
       - name: Compile Delegate Container
         run: |
-          ls -al
-          ls -al ./delegates
 
-          docker build -t ${{secrets.DOCKERHUB_USER}}/${{env.IMAGE_NAME}}:${{env.TAG}} -f ./delegates/dockerfile_ubuntu_ansible
+          docker build -t ${{secrets.DOCKERHUB_USER}}/${{env.IMAGE_NAME}}:${{env.TAG}} -f ./delegates/dockerfile_ubuntu_ansible .
 
           docker image ls
 
