@@ -21,10 +21,9 @@ RUN apt update \
     && pip3 install pywinrm \
     && pip3 install requests-credssp \
     && apt autoremove -y \
-    && mkdir /ansible \
-    && chmod 777 -R /ansible
+    && curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
 
-WORKDIR /ansible
+WORKDIR /harness
 CMD ["/bin/bash"]
 
 
