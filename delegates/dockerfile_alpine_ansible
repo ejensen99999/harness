@@ -5,6 +5,7 @@ RUN apk add ansible \
         curl \
         gcc \
         openssh \
+        python3-dev \
         py3-pip \
     && pip3 install --upgrade pip \
     && pip3 install azure-cli 
