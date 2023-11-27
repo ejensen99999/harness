@@ -2,8 +2,9 @@ FROM alpine:3.18.4
 
 RUN apk add ansible \
     && apk add --no-cache bash \
-        openssh \
         curl \
+        gcc \
+        openssh \
         py3-pip \
     && pip3 install --upgrade pip \
     && pip3 install azure-cli 
