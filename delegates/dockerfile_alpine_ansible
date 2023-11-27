@@ -1,11 +1,11 @@
 FROM alpine:3.18.4
 
 RUN apk add ansible \
-    && apk add --no-cache \
+    && apk add --no-cache bash \
         openssh \
         curl \
         py3-pip \
-    && curl -sL https://aka.ms/InstallAzureCLIDeb | sudo sh 
+    && curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash 
 
 WORKDIR /ansible
 CMD ["/bin/sh"]
