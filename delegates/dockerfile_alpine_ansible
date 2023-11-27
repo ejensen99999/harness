@@ -5,7 +5,8 @@ RUN apk add ansible \
         openssh \
         curl \
         py3-pip \
-    && curl -sL https://aka.ms/InstallAzureCLIDeb | bash 
+    && pip3 install --upgrade pip \
+    && pip3 install azure-cli 
 
 WORKDIR /ansible
 CMD ["/bin/sh"]
