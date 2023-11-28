@@ -23,6 +23,9 @@ RUN apt update \
     && apt autoremove -y \
     && curl -sL https://aka.ms/InstallAzureCLIDeb | bash
 
+RUN ansible-galaxy collection install azure.azcollection \
+    && pip3 install -r ~/.ansible/collections/ansible_collections/azure/azcollection/requirements-azure.txt 
+    
 WORKDIR /harness
 CMD ["/bin/bash"]
 
