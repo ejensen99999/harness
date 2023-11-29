@@ -11,7 +11,7 @@ env:
   WORKING_REPO_DIR: target
   DOCKER_REPO: "ejensen99999"
   IMAGE_NAME: "ansible-runner"
-  TAG: "ubuntu2204"
+  TAG: "ubuntu2204.2023"
   
 
 jobs:
