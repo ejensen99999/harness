@@ -20,7 +20,7 @@ RUN apt update \
     && pip3 install pywinrm[kerberos] \
     && pip3 install pywinrm \
     && pip3 install requests-credssp \
-    && pip3 install -u requests-ntlm \
+    && pip3 install requests-ntlm \
     && apt autoremove -y \
     && curl -sL https://aka.ms/InstallAzureCLIDeb | bash
 
