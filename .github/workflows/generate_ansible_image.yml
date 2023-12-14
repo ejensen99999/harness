@@ -11,7 +11,7 @@ env:
   WORKING_REPO_DIR: target
   DOCKER_REPO: "ejensen99999"
   IMAGE_NAME: "ansible-runner"
-  TAG: "ubuntu2204.2023"
+  TAG: "ubuntu2204"
   
 
 jobs:
@@ -23,11 +23,15 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
+      - name: set NOW
+        run: |
+          echo "NOW=$(date +'%F.%H.%M')" >> "$GITHUB_ENV"
+
       # Runs a single command using the runners shell
       - name: Compile Delegate Container
         run: |
 
-          docker build -t ${{secrets.DOCKERHUB_USER}}/${{env.IMAGE_NAME}}:${{env.TAG}} -f ./delegates/dockerfile_ubuntu_ansible .
+          docker build -t ${{secrets.DOCKERHUB_USER}}/${{env.IMAGE_NAME}}:${{env.TAG}}.${{env.NOW}} -f ./delegates/dockerfile_ubuntu_ansible .
 
           docker image ls
 
@@ -35,4 +39,4 @@ jobs:
       - name: Push to Github Packages
         run: |
           echo "${{ secrets.DOCKERHUB_PAT }}" | docker login -u ${{secrets.DOCKERHUB_USER}} --password-stdin
-          docker push ${{secrets.DOCKERHUB_USER}}/${{env.IMAGE_NAME}}:${{env.TAG}}
+          docker push ${{secrets.DOCKERHUB_USER}}/${{env.IMAGE_NAME}}:${{env.TAG}}.${{env.NOW}}
