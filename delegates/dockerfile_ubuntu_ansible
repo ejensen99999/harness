@@ -25,7 +25,6 @@ RUN apt update \
     && curl -sL https://aka.ms/InstallAzureCLIDeb | bash
 
 RUN ansible-galaxy collection list \
-    && ansible-galaxy collection install azure.azcollection --force \
     && pip3 install -r /usr/lib/python3/dist-packages/ansible_collections/azure/azcollection/requirements-azure.txt 
     
 WORKDIR /harness
